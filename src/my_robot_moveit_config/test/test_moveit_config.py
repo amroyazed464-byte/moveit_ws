@@ -263,7 +263,18 @@ class MoveItConfigContractTest(unittest.TestCase):
                     value, upper, f"{pose_name}/{joint_name} above limit"
                 )
 
-        for disabled_pair in srdf_root.findall("disable_collisions"):
+        disabled_pairs = srdf_root.findall("disable_collisions")
+        self.assertGreater(
+            len(disabled_pairs),
+            7,
+            "self-collision matrix must include sampled non-adjacent pairs",
+        )
+        self.assertIn(
+            "Never",
+            {pair.attrib["reason"] for pair in disabled_pairs},
+            "self-collision matrix must contain Setup Assistant samples",
+        )
+        for disabled_pair in disabled_pairs:
             self.assertIn(disabled_pair.attrib["link1"], self.urdf_links)
             self.assertIn(disabled_pair.attrib["link2"], self.urdf_links)
 
