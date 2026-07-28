@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_file)['initial_positions']}"/>
+
+    <ros2_control name="Arm" type="system">
+        <hardware>
+            <!-- By default, set up controllers for simulation. This won't work on real hardware -->
+            <plugin>mock_components/GenericSystem</plugin>
+        </hardware>
+        <joint name="base_yaw_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+        <joint name="shoulder_roll_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+        <joint name="elbow_roll_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+        <joint name="wrist_yaw_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+        <joint name="wrist_roll_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+        <joint name="tool_yaw_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+        <joint name="gripper_finger_left_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+
+    </ros2_control>
+</robot>
