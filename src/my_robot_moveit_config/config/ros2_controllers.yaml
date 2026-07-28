@@ -1,11 +1,10 @@
-# This config file is used by ros2_control
+# ros2_control controller configuration for the learning arm
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 100
 
     arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -13,15 +12,15 @@ controller_manager:
 arm_controller:
   ros__parameters:
     joints:
-      - base_yaw_joint
-      - shoulder_roll_joint
-      - elbow_roll_joint
-      - wrist_yaw_joint
-      - wrist_roll_joint
-      - tool_yaw_joint
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
     command_interfaces:
       - position
     state_interfaces:
       - position
       - velocity
-    allow_nonzero_velocity_at_trajectory_end: true
+    allow_nonzero_velocity_at_trajectory_end: false

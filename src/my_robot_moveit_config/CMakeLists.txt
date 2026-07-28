@@ -3,14 +3,22 @@ project(my_robot_moveit_config)
 
 find_package(ament_cmake REQUIRED)
 
-ament_package()
+install(
+  DIRECTORY launch config
+  DESTINATION share/${PROJECT_NAME}
+)
+install(
+  FILES .setup_assistant
+  DESTINATION share/${PROJECT_NAME}
+)
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launch")
-  install(
-    DIRECTORY launch
-    DESTINATION share/${PROJECT_NAME}
-    PATTERN "setup_assistant.launch" EXCLUDE)
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+  ament_add_pytest_test(
+    moveit_config_validation
+    test/test_moveit_config.py
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  )
 endif()
 
-install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
-install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})
+ament_package()

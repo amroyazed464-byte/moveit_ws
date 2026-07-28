@@ -1,5 +1,4 @@
-# MoveIt uses this configuration for controller management
-
+# MoveIt trajectory-execution controller mapping
 moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
 
 moveit_simple_controller_manager:
@@ -11,9 +10,9 @@ moveit_simple_controller_manager:
     action_ns: follow_joint_trajectory
     default: true
     joints:
-      - base_yaw_joint
-      - shoulder_roll_joint
-      - elbow_roll_joint
-      - wrist_yaw_joint
-      - wrist_roll_joint
-      - tool_yaw_joint
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
