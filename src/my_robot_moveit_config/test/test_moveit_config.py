@@ -22,6 +22,50 @@ EXPECTED_JOINTS = [
     "joint5",
     "joint6",
 ]
+EXPECTED_LINKS = [
+    "base_link",
+    "shoulder_link",
+    "arm_link",
+    "elbow_link",
+    "forearm_link",
+    "wrist_link",
+    "hand_link",
+    "tool_link",
+]
+EXPECTED_LINK_GEOMETRY = {
+    "base_link": ("box", {"size": "0.4 0.4 0.1"}, "0 0 0.05"),
+    "shoulder_link": (
+        "cylinder",
+        {"length": "0.5", "radius": "0.1"},
+        "0 0 0.25",
+    ),
+    "arm_link": (
+        "cylinder",
+        {"length": "0.6", "radius": "0.05"},
+        "0 0 0.3",
+    ),
+    "elbow_link": (
+        "cylinder",
+        {"length": "0.1", "radius": "0.05"},
+        "0 0 0.05",
+    ),
+    "forearm_link": (
+        "cylinder",
+        {"length": "0.5", "radius": "0.05"},
+        "0 0 0.25",
+    ),
+    "wrist_link": ("box", {"size": "0.1 0.1 0.05"}, "0 0 0.025"),
+    "hand_link": ("box", {"size": "0.1 0.1 0.02"}, "0 0 0.01"),
+}
+EXPECTED_JOINT_LAYOUT = {
+    "joint1": ("base_link", "shoulder_link", "revolute", "0 0 0.1", "0 0 1"),
+    "joint2": ("shoulder_link", "arm_link", "revolute", "0 0 0.5", "0 1 0"),
+    "joint3": ("arm_link", "elbow_link", "revolute", "0 0 0.6", "0 1 0"),
+    "joint4": ("elbow_link", "forearm_link", "revolute", "0 0 0.1", "0 0 1"),
+    "joint5": ("forearm_link", "wrist_link", "revolute", "0 0 0.5", "0 1 0"),
+    "joint6": ("wrist_link", "hand_link", "revolute", "0 0 0.05", "0 0 1"),
+    "tool_joint": ("hand_link", "tool_link", "fixed", "0 0 0.1", None),
+}
 EXPECTED_POSES = {
     "home": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
     "pose_1": [1.1705, 1.1686, 0.9172, 1.2449, 0.9940, 1.0596],
@@ -84,9 +128,65 @@ class MoveItConfigContractTest(unittest.TestCase):
             if joint.attrib["type"] != "fixed"
         ]
         self.assertEqual(EXPECTED_JOINTS, active_joints)
-        self.assertIn("base_link", self.urdf_links)
-        self.assertIn("tool_link", self.urdf_links)
+        self.assertEqual(set(EXPECTED_LINKS), self.urdf_links)
         self.assertEqual("revolute", self.urdf_joints["joint6"].attrib["type"])
+
+    def test_learning_urdf_link_geometry_and_collisions_match(self):
+        for link_name, (
+            shape_name,
+            expected_attributes,
+            expected_origin,
+        ) in EXPECTED_LINK_GEOMETRY.items():
+            link = next(
+                link
+                for link in self.urdf_root.findall("link")
+                if link.attrib["name"] == link_name
+            )
+            for element_name in ("visual", "collision"):
+                with self.subTest(link=link_name, element=element_name):
+                    element = link.find(element_name)
+                    self.assertIsNotNone(element)
+                    origin = element.find("origin")
+                    self.assertEqual(expected_origin, origin.attrib["xyz"])
+                    self.assertEqual("0 0 0", origin.attrib.get("rpy", "0 0 0"))
+                    shape = element.find(f"geometry/{shape_name}")
+                    self.assertIsNotNone(shape)
+                    self.assertEqual(expected_attributes, shape.attrib)
+
+        tool_link = next(
+            link
+            for link in self.urdf_root.findall("link")
+            if link.attrib["name"] == "tool_link"
+        )
+        self.assertIsNone(tool_link.find("visual"))
+        self.assertIsNone(tool_link.find("collision"))
+
+    def test_learning_urdf_joint_layout_matches_physical_stack(self):
+        self.assertEqual(set(EXPECTED_JOINT_LAYOUT), set(self.urdf_joints))
+        for joint_name, (
+            expected_parent,
+            expected_child,
+            expected_type,
+            expected_origin,
+            expected_axis,
+        ) in EXPECTED_JOINT_LAYOUT.items():
+            with self.subTest(joint=joint_name):
+                joint = self.urdf_joints[joint_name]
+                self.assertEqual(expected_type, joint.attrib["type"])
+                self.assertEqual(
+                    expected_parent, joint.find("parent").attrib["link"]
+                )
+                self.assertEqual(
+                    expected_child, joint.find("child").attrib["link"]
+                )
+                origin = joint.find("origin")
+                self.assertEqual(expected_origin, origin.attrib["xyz"])
+                self.assertEqual("0 0 0", origin.attrib.get("rpy", "0 0 0"))
+                axis = joint.find("axis")
+                if expected_axis is None:
+                    self.assertIsNone(axis)
+                else:
+                    self.assertEqual(expected_axis, axis.attrib["xyz"])
 
     def test_learning_description_package_installs_existing_resources(self):
         cmake_text = (DESCRIPTION_PACKAGE / "CMakeLists.txt").read_text(
