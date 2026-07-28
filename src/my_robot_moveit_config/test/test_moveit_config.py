@@ -158,7 +158,24 @@ class MoveItConfigContractTest(unittest.TestCase):
             for link in self.urdf_root.findall("link")
             if link.attrib["name"] == "tool_link"
         )
-        self.assertIsNone(tool_link.find("visual"))
+        self.assertIsNone(tool_link.find("collision"))
+
+    def test_tool_link_has_visual_marker_required_for_rviz_trail(self):
+        tool_link = next(
+            link
+            for link in self.urdf_root.findall("link")
+            if link.attrib["name"] == "tool_link"
+        )
+        visual = tool_link.find("visual")
+        self.assertIsNotNone(
+            visual,
+            "RViz cannot render Show Trail for a link without visual geometry",
+        )
+        self.assertEqual("0 0 0", visual.find("origin").attrib["xyz"])
+        self.assertEqual(
+            {"radius": "0.015"},
+            visual.find("geometry/sphere").attrib,
+        )
         self.assertIsNone(tool_link.find("collision"))
 
     def test_learning_urdf_joint_layout_matches_physical_stack(self):
@@ -426,7 +443,6 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertTrue(
             motion_planning["Scene Robot"]["Links"]["tool_link"]["Show Trail"]
         )
-
 
 if __name__ == "__main__":
     unittest.main()

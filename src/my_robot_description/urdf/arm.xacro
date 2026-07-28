@@ -165,8 +165,22 @@
     <limit lower="-3.14" upper="3.14" effort="10" velocity="1"/>
   </joint>
 
-  <!-- Virtual end-effector frame: no visual or collision geometry. -->
-  <link name="tool_link"/>
+  <!--
+    Virtual end-effector frame. The small visual-only sphere gives RViz a
+    renderable node for Scene Robot/Links/tool_link/Show Trail. It has no
+    collision geometry, so it does not affect planning or self-collision.
+  -->
+  <link name="tool_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+      <material name="tool_trail_marker">
+        <color rgba="1.0 0.85 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
 
   <joint name="tool_joint" type="fixed">
     <parent link="hand_link"/>
