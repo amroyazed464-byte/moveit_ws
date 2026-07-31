@@ -2,6 +2,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 100
+    enforce_command_limits: true
 
     arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController

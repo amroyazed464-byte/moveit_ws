@@ -1,3 +1,4 @@
+import ast
 from pathlib import Path
 import re
 import unittest
@@ -13,6 +14,7 @@ DESCRIPTION_XACRO = (
 )
 DESCRIPTION_PACKAGE = WORKSPACE_SRC / "my_robot_description"
 CONFIG_DIR = PACKAGE_ROOT / "config"
+LAUNCH_DIR = PACKAGE_ROOT / "launch"
 
 EXPECTED_ARM_JOINTS = [
     "joint1",
@@ -321,12 +323,39 @@ class MoveItConfigContractTest(unittest.TestCase):
             [joint.attrib["name"] for joint in gripper_group.findall("joint")],
         )
 
-        gripper_states = {
-            state.attrib["name"]: float(state.find("joint").attrib["value"])
+        gripper_state_elements = [
+            state
             for state in srdf_root.findall("group_state")
             if state.attrib["group"] == "gripper"
-        }
-        self.assertEqual(EXPECTED_GRIPPER_STATES, gripper_states)
+        ]
+        gripper_state_names = [
+            state.attrib["name"] for state in gripper_state_elements
+        ]
+        self.assertEqual(
+            len(gripper_state_names),
+            len(set(gripper_state_names)),
+            "gripper group_state names must be unique",
+        )
+        gripper_states = {}
+        for state in gripper_state_elements:
+            joint_elements = state.findall("joint")
+            joint_values = {
+                joint.attrib["name"]: float(joint.attrib["value"])
+                for joint in joint_elements
+            }
+            self.assertEqual(
+                len(joint_elements),
+                len(joint_values),
+                f"{state.attrib['name']} must not repeat a joint",
+            )
+            gripper_states[state.attrib["name"]] = joint_values
+        self.assertEqual(
+            {
+                state_name: {GRIPPER_COMMAND_JOINT: value}
+                for state_name, value in EXPECTED_GRIPPER_STATES.items()
+            },
+            gripper_states,
+        )
         self.assertNotIn("gripper_half_opne", gripper_states)
 
         end_effector = srdf_root.find("end_effector")
@@ -420,6 +449,11 @@ class MoveItConfigContractTest(unittest.TestCase):
 
         ros2 = load_yaml(CONFIG_DIR / "ros2_controllers.yaml")
         manager = ros2["controller_manager"]["ros__parameters"]
+        self.assertIs(
+            True,
+            manager.get("enforce_command_limits"),
+            "controller_manager must clamp commands to URDF joint limits",
+        )
         self.assertEqual(
             "position_controllers/GripperActionController",
             manager["gripper_controller"]["type"],
@@ -548,6 +582,29 @@ class MoveItConfigContractTest(unittest.TestCase):
             load_yaml(PACKAGE_ROOT / ".setup_assistant")
         except ValueError as exc:
             self.fail(str(exc))
+
+    def test_launch_files_parse_and_spawn_controllers_uses_standard_helper(self):
+        launch_trees = {}
+        for path in sorted(LAUNCH_DIR.glob("*.py")):
+            with self.subTest(path=path.name):
+                launch_trees[path.name] = ast.parse(
+                    path.read_text(encoding="utf-8"),
+                    filename=str(path),
+                )
+
+        spawn_tree = launch_trees["spawn_controllers.launch.py"]
+        helper_calls = [
+            node
+            for node in ast.walk(spawn_tree)
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "generate_spawn_controllers_launch"
+        ]
+        self.assertEqual(
+            1,
+            len(helper_calls),
+            "spawn launch must call generate_spawn_controllers_launch once",
+        )
 
     def test_mature_model_joint_names_are_absent(self):
         config_text = "\n".join(
