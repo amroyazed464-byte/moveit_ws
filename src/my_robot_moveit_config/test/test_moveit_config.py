@@ -112,6 +112,11 @@ EXPECTED_POSES = {
     "pose_1": [1.1705, 1.1686, 0.9172, 1.2449, 0.9940, 1.0596],
     "pose_2": [1.5421, 1.57, 0.5030, 0.2787, 1.3285, 1.7659],
 }
+EXPECTED_GRIPPER_STATES = {
+    "gripper_open": 0.034,
+    "gripper_half_open": 0.017,
+    "gripper_close": 0.0,
+}
 MATURE_MODEL_JOINTS = {
     "base_yaw_joint",
     "shoulder_roll_joint",
@@ -306,6 +311,30 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertEqual("base_link", chain.attrib["base_link"])
         self.assertEqual("tool_link", chain.attrib["tip_link"])
 
+        gripper_group = next(
+            group
+            for group in srdf_root.findall("group")
+            if group.attrib["name"] == "gripper"
+        )
+        self.assertEqual(
+            [GRIPPER_COMMAND_JOINT, GRIPPER_MIMIC_JOINT],
+            [joint.attrib["name"] for joint in gripper_group.findall("joint")],
+        )
+
+        gripper_states = {
+            state.attrib["name"]: float(state.find("joint").attrib["value"])
+            for state in srdf_root.findall("group_state")
+            if state.attrib["group"] == "gripper"
+        }
+        self.assertEqual(EXPECTED_GRIPPER_STATES, gripper_states)
+        self.assertNotIn("gripper_half_opne", gripper_states)
+
+        end_effector = srdf_root.find("end_effector")
+        self.assertEqual("gripper_end_effector", end_effector.attrib["name"])
+        self.assertEqual("gripper_base", end_effector.attrib["parent_link"])
+        self.assertEqual("gripper", end_effector.attrib["group"])
+        self.assertEqual("arm", end_effector.attrib["parent_group"])
+
         actual_poses = {}
         for state in srdf_root.findall("group_state"):
             if state.attrib["group"] != "arm":
@@ -351,6 +380,18 @@ class MoveItConfigContractTest(unittest.TestCase):
         for disabled_pair in disabled_pairs:
             self.assertIn(disabled_pair.attrib["link1"], self.urdf_links)
             self.assertIn(disabled_pair.attrib["link2"], self.urdf_links)
+
+        disabled_links = {
+            frozenset((pair.attrib["link1"], pair.attrib["link2"]))
+            for pair in disabled_pairs
+        }
+        for pair in {
+            frozenset(("hand_link", "gripper_base")),
+            frozenset(("gripper_base", "gripper_finger_left")),
+            frozenset(("gripper_base", "gripper_finger_right")),
+            frozenset(("gripper_finger_left", "gripper_finger_right")),
+        }:
+            self.assertIn(pair, disabled_links)
 
     def test_controller_joint_order_and_interfaces_match(self):
         moveit = load_yaml(CONFIG_DIR / "moveit_controllers.yaml")
@@ -432,7 +473,7 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertEqual(0.1, limits["default_velocity_scaling_factor"])
         self.assertEqual(0.1, limits["default_acceleration_scaling_factor"])
         self.assertEqual(
-            set(EXPECTED_ARM_JOINTS),
+            set(EXPECTED_ARM_JOINTS + [GRIPPER_COMMAND_JOINT]),
             set(limits["joint_limits"]),
         )
         for joint_name in EXPECTED_ARM_JOINTS:
@@ -445,6 +486,12 @@ class MoveItConfigContractTest(unittest.TestCase):
             )
             self.assertTrue(override["has_acceleration_limits"])
             self.assertEqual(1.0, float(override["max_acceleration"]))
+
+        gripper_limit = limits["joint_limits"][GRIPPER_COMMAND_JOINT]
+        self.assertTrue(gripper_limit["has_position_limits"])
+        self.assertEqual(0.0, float(gripper_limit["min_position"]))
+        self.assertEqual(0.034, float(gripper_limit["max_position"]))
+        self.assertEqual(0.1, float(gripper_limit["max_velocity"]))
 
     def test_setup_assistant_and_package_select_learning_description(self):
         try:
