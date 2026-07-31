@@ -14,13 +14,19 @@ DESCRIPTION_XACRO = (
 DESCRIPTION_PACKAGE = WORKSPACE_SRC / "my_robot_description"
 CONFIG_DIR = PACKAGE_ROOT / "config"
 
-EXPECTED_JOINTS = [
+EXPECTED_ARM_JOINTS = [
     "joint1",
     "joint2",
     "joint3",
     "joint4",
     "joint5",
     "joint6",
+]
+GRIPPER_COMMAND_JOINT = "gripper_finger_left_joint"
+GRIPPER_MIMIC_JOINT = "gripper_finger_right_joint"
+EXPECTED_ACTIVE_JOINTS = EXPECTED_ARM_JOINTS + [
+    GRIPPER_COMMAND_JOINT,
+    GRIPPER_MIMIC_JOINT,
 ]
 EXPECTED_LINKS = [
     "base_link",
@@ -30,6 +36,9 @@ EXPECTED_LINKS = [
     "forearm_link",
     "wrist_link",
     "hand_link",
+    "gripper_base",
+    "gripper_finger_left",
+    "gripper_finger_right",
     "tool_link",
 ]
 EXPECTED_LINK_GEOMETRY = {
@@ -56,6 +65,17 @@ EXPECTED_LINK_GEOMETRY = {
     ),
     "wrist_link": ("box", {"size": "0.1 0.1 0.05"}, "0 0 0.025"),
     "hand_link": ("box", {"size": "0.1 0.1 0.02"}, "0 0 0.01"),
+    "gripper_base": ("box", {"size": "0.12 0.08 0.04"}, "0 0 0.02"),
+    "gripper_finger_left": (
+        "box",
+        {"size": "0.02 0.04 0.12"},
+        "0 0 0.06",
+    ),
+    "gripper_finger_right": (
+        "box",
+        {"size": "0.02 0.04 0.12"},
+        "0 0 0.06",
+    ),
 }
 EXPECTED_JOINT_LAYOUT = {
     "joint1": ("base_link", "shoulder_link", "revolute", "0 0 0.1", "0 0 1"),
@@ -64,7 +84,28 @@ EXPECTED_JOINT_LAYOUT = {
     "joint4": ("elbow_link", "forearm_link", "revolute", "0 0 0.1", "0 0 1"),
     "joint5": ("forearm_link", "wrist_link", "revolute", "0 0 0.5", "0 1 0"),
     "joint6": ("wrist_link", "hand_link", "revolute", "0 0 0.05", "0 0 1"),
-    "tool_joint": ("hand_link", "tool_link", "fixed", "0 0 0.1", None),
+    "gripper_base_joint": (
+        "hand_link",
+        "gripper_base",
+        "fixed",
+        "0 0 0.02",
+        None,
+    ),
+    "gripper_finger_left_joint": (
+        "gripper_base",
+        "gripper_finger_left",
+        "prismatic",
+        "0.01 0 0.04",
+        "1 0 0",
+    ),
+    "gripper_finger_right_joint": (
+        "gripper_base",
+        "gripper_finger_right",
+        "prismatic",
+        "-0.01 0 0.04",
+        "1 0 0",
+    ),
+    "tool_joint": ("gripper_base", "tool_link", "fixed", "0 0 0.10", None),
 }
 EXPECTED_POSES = {
     "home": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
@@ -127,9 +168,25 @@ class MoveItConfigContractTest(unittest.TestCase):
             for name, joint in self.urdf_joints.items()
             if joint.attrib["type"] != "fixed"
         ]
-        self.assertEqual(EXPECTED_JOINTS, active_joints)
+        self.assertEqual(EXPECTED_ACTIVE_JOINTS, active_joints)
         self.assertEqual(set(EXPECTED_LINKS), self.urdf_links)
         self.assertEqual("revolute", self.urdf_joints["joint6"].attrib["type"])
+
+    def test_gripper_joint_limits_and_mimic_contract(self):
+        left = self.urdf_joints[GRIPPER_COMMAND_JOINT]
+        left_limit = left.find("limit")
+        self.assertEqual("0", left_limit.attrib["lower"])
+        self.assertEqual("0.034", left_limit.attrib["upper"])
+        self.assertEqual("20", left_limit.attrib["effort"])
+        self.assertEqual("0.1", left_limit.attrib["velocity"])
+
+        right = self.urdf_joints[GRIPPER_MIMIC_JOINT]
+        right_limit = right.find("limit")
+        self.assertEqual("-0.034", right_limit.attrib["lower"])
+        self.assertEqual("0", right_limit.attrib["upper"])
+        mimic = right.find("mimic")
+        self.assertEqual(GRIPPER_COMMAND_JOINT, mimic.attrib["joint"])
+        self.assertEqual("-1.0", mimic.attrib["multiplier"])
 
     def test_learning_urdf_link_geometry_and_collisions_match(self):
         for link_name, (
@@ -258,18 +315,18 @@ class MoveItConfigContractTest(unittest.TestCase):
                 for joint in state.findall("joint")
             }
             self.assertEqual(
-                set(EXPECTED_JOINTS),
+                set(EXPECTED_ARM_JOINTS),
                 set(values),
                 f"{state.attrib['name']} must define every learning-arm joint",
             )
             actual_poses[state.attrib["name"]] = [
-                values[name] for name in EXPECTED_JOINTS
+                values[name] for name in EXPECTED_ARM_JOINTS
             ]
 
         self.assertEqual(EXPECTED_POSES, actual_poses)
 
         for pose_name, values in actual_poses.items():
-            for joint_name, value in zip(EXPECTED_JOINTS, values):
+            for joint_name, value in zip(EXPECTED_ARM_JOINTS, values):
                 limit = self.urdf_joints[joint_name].find("limit")
                 lower = float(limit.attrib["lower"])
                 upper = float(limit.attrib["upper"])
@@ -300,7 +357,7 @@ class MoveItConfigContractTest(unittest.TestCase):
         moveit_manager = moveit["moveit_simple_controller_manager"]
         self.assertEqual(["arm_controller"], moveit_manager["controller_names"])
         self.assertEqual(
-            EXPECTED_JOINTS,
+            EXPECTED_ARM_JOINTS,
             moveit_manager["arm_controller"]["joints"],
         )
         self.assertEqual(
@@ -314,7 +371,7 @@ class MoveItConfigContractTest(unittest.TestCase):
 
         ros2 = load_yaml(CONFIG_DIR / "ros2_controllers.yaml")
         arm = ros2["arm_controller"]["ros__parameters"]
-        self.assertEqual(EXPECTED_JOINTS, arm["joints"])
+        self.assertEqual(EXPECTED_ARM_JOINTS, arm["joints"])
         self.assertEqual(["position"], arm["command_interfaces"])
         self.assertEqual(["position", "velocity"], arm["state_interfaces"])
         self.assertFalse(arm["allow_nonzero_velocity_at_trajectory_end"])
@@ -345,7 +402,7 @@ class MoveItConfigContractTest(unittest.TestCase):
             joint.attrib["name"]
             for joint in control_blocks[0].findall("joint")
         ]
-        self.assertEqual(EXPECTED_JOINTS, controlled_joints)
+        self.assertEqual(EXPECTED_ARM_JOINTS, controlled_joints)
         for joint in control_blocks[0].findall("joint"):
             self.assertEqual(
                 ["position"],
@@ -367,7 +424,7 @@ class MoveItConfigContractTest(unittest.TestCase):
     def test_initial_positions_and_joint_limits_cover_all_joints(self):
         initial = load_yaml(CONFIG_DIR / "initial_positions.yaml")
         self.assertEqual(
-            {joint: 0 for joint in EXPECTED_JOINTS},
+            {joint: 0 for joint in EXPECTED_ARM_JOINTS},
             initial["initial_positions"],
         )
 
@@ -375,10 +432,10 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertEqual(0.1, limits["default_velocity_scaling_factor"])
         self.assertEqual(0.1, limits["default_acceleration_scaling_factor"])
         self.assertEqual(
-            set(EXPECTED_JOINTS),
+            set(EXPECTED_ARM_JOINTS),
             set(limits["joint_limits"]),
         )
-        for joint_name in EXPECTED_JOINTS:
+        for joint_name in EXPECTED_ARM_JOINTS:
             override = limits["joint_limits"][joint_name]
             urdf_limit = self.urdf_joints[joint_name].find("limit")
             self.assertTrue(override["has_velocity_limits"])
