@@ -396,7 +396,10 @@ class MoveItConfigContractTest(unittest.TestCase):
     def test_controller_joint_order_and_interfaces_match(self):
         moveit = load_yaml(CONFIG_DIR / "moveit_controllers.yaml")
         moveit_manager = moveit["moveit_simple_controller_manager"]
-        self.assertEqual(["arm_controller"], moveit_manager["controller_names"])
+        self.assertEqual(
+            ["arm_controller", "gripper_controller"],
+            moveit_manager["controller_names"],
+        )
         self.assertEqual(
             EXPECTED_ARM_JOINTS,
             moveit_manager["arm_controller"]["joints"],
@@ -409,8 +412,22 @@ class MoveItConfigContractTest(unittest.TestCase):
             "follow_joint_trajectory",
             moveit_manager["arm_controller"]["action_ns"],
         )
+        gripper_moveit = moveit_manager["gripper_controller"]
+        self.assertEqual("GripperCommand", gripper_moveit["type"])
+        self.assertEqual("gripper_cmd", gripper_moveit["action_ns"])
+        self.assertTrue(gripper_moveit["default"])
+        self.assertEqual([GRIPPER_COMMAND_JOINT], gripper_moveit["joints"])
 
         ros2 = load_yaml(CONFIG_DIR / "ros2_controllers.yaml")
+        manager = ros2["controller_manager"]["ros__parameters"]
+        self.assertEqual(
+            "position_controllers/GripperActionController",
+            manager["gripper_controller"]["type"],
+        )
+        gripper_ros2 = ros2["gripper_controller"]["ros__parameters"]
+        self.assertEqual(GRIPPER_COMMAND_JOINT, gripper_ros2["joint"])
+        self.assertEqual(0.002, float(gripper_ros2["goal_tolerance"]))
+        self.assertEqual(20.0, float(gripper_ros2["max_effort"]))
         arm = ros2["arm_controller"]["ros__parameters"]
         self.assertEqual(EXPECTED_ARM_JOINTS, arm["joints"])
         self.assertEqual(["position"], arm["command_interfaces"])
@@ -443,7 +460,10 @@ class MoveItConfigContractTest(unittest.TestCase):
             joint.attrib["name"]
             for joint in control_blocks[0].findall("joint")
         ]
-        self.assertEqual(EXPECTED_ARM_JOINTS, controlled_joints)
+        self.assertEqual(
+            EXPECTED_ARM_JOINTS + [GRIPPER_COMMAND_JOINT],
+            controlled_joints,
+        )
         for joint in control_blocks[0].findall("joint"):
             self.assertEqual(
                 ["position"],
@@ -465,7 +485,10 @@ class MoveItConfigContractTest(unittest.TestCase):
     def test_initial_positions_and_joint_limits_cover_all_joints(self):
         initial = load_yaml(CONFIG_DIR / "initial_positions.yaml")
         self.assertEqual(
-            {joint: 0 for joint in EXPECTED_ARM_JOINTS},
+            {
+                **{joint: 0 for joint in EXPECTED_ARM_JOINTS},
+                GRIPPER_COMMAND_JOINT: 0,
+            },
             initial["initial_positions"],
         )
 
@@ -512,6 +535,7 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertNotIn("robot_description", runtime_dependencies)
         self.assertIn("joint_trajectory_controller", runtime_dependencies)
         self.assertIn("joint_state_broadcaster", runtime_dependencies)
+        self.assertIn("gripper_controllers", runtime_dependencies)
 
     def test_all_yaml_files_have_unique_keys(self):
         for path in sorted(CONFIG_DIR.glob("*.yaml")):
