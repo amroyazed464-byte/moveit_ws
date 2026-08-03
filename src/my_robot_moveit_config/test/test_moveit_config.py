@@ -17,6 +17,9 @@ CONFIG_DIR = PACKAGE_ROOT / "config"
 LAUNCH_DIR = PACKAGE_ROOT / "launch"
 INTERFACE_PACKAGE = WORKSPACE_SRC / "my_moveit_interfaces"
 POSE_COMMAND_MSG = INTERFACE_PACKAGE / "msg" / "PoseCommand.msg"
+COMMANDER_PACKAGE = WORKSPACE_SRC / "my_robot_commander"
+COMMANDER_SOURCE = COMMANDER_PACKAGE / "src" / "commander.cpp"
+COMMANDER_MAIN = COMMANDER_PACKAGE / "src" / "main.cpp"
 EXPECTED_POSE_COMMAND_FIELDS = [
     "float64 x",
     "float64 y",
@@ -212,6 +215,36 @@ class MoveItConfigContractTest(unittest.TestCase):
                 for element in manifest.findall("member_of_group")
             ],
         )
+
+    def test_cpp_commander_restores_course_topics_and_compound_field(self):
+        source = COMMANDER_SOURCE.read_text(encoding="utf-8")
+        main = COMMANDER_MAIN.read_text(encoding="utf-8")
+
+        for topic in (
+            "/gripper_command",
+            "/joint_command",
+            "/pose_command",
+        ):
+            self.assertIn(topic, source)
+
+        for method in (
+            "planAndExecute",
+            "goToNamedTarget",
+            "goToJointTarget",
+            "goToPoseTarget",
+            "poseCommandCallback",
+        ):
+            self.assertIn(method, source)
+
+        self.assertIn("msg->sunyijie_gripper", source)
+        self.assertIn("moveSunyijieGripper", source)
+        self.assertLess(
+            source.index("goToPoseTarget(values, msg->cartesian_path)"),
+            source.index(
+                "moveSunyijieGripper(msg->sunyijie_gripper)"
+            ),
+        )
+        self.assertIn("MultiThreadedExecutor", main)
 
     def test_learning_urdf_has_expected_arm_chain(self):
         active_joints = [
