@@ -262,7 +262,6 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertEqual("0", left_limit.attrib["lower"])
         self.assertEqual("0.034", left_limit.attrib["upper"])
         self.assertEqual("20", left_limit.attrib["effort"])
-        self.assertEqual("0.1", left_limit.attrib["velocity"])
 
         right = self.urdf_joints[GRIPPER_MIMIC_JOINT]
         right_limit = right.find("limit")
@@ -625,7 +624,37 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertTrue(gripper_limit["has_position_limits"])
         self.assertEqual(0.0, float(gripper_limit["min_position"]))
         self.assertEqual(0.034, float(gripper_limit["max_position"]))
-        self.assertEqual(0.1, float(gripper_limit["max_velocity"]))
+
+    def test_gripper_controller_motion_is_visible_in_recording(self):
+        limits = load_yaml(CONFIG_DIR / "joint_limits.yaml")
+        gripper_limit = limits["joint_limits"][GRIPPER_COMMAND_JOINT]
+        urdf_limit = self.urdf_joints[GRIPPER_COMMAND_JOINT].find("limit")
+        controller_velocity = float(urdf_limit.attrib["velocity"])
+        moveit_velocity = float(gripper_limit["max_velocity"])
+        self.assertEqual(controller_velocity, moveit_velocity)
+
+        travel = float(gripper_limit["max_position"]) - float(
+            gripper_limit["min_position"]
+        )
+        minimum_motion_duration = travel / controller_velocity
+        self.assertGreaterEqual(minimum_motion_duration, 1.5)
+
+    def test_gripper_stall_timeout_allows_visible_motion_to_finish(self):
+        limits = load_yaml(CONFIG_DIR / "joint_limits.yaml")
+        gripper_limit = limits["joint_limits"][GRIPPER_COMMAND_JOINT]
+        travel = float(gripper_limit["max_position"]) - float(
+            gripper_limit["min_position"]
+        )
+        motion_duration = travel / float(gripper_limit["max_velocity"])
+
+        controllers = load_yaml(CONFIG_DIR / "ros2_controllers.yaml")
+        gripper_parameters = controllers["gripper_controller"][
+            "ros__parameters"
+        ]
+        self.assertIn("stall_timeout", gripper_parameters)
+        self.assertGreater(
+            float(gripper_parameters["stall_timeout"]), motion_duration
+        )
 
     def test_setup_assistant_and_package_select_learning_description(self):
         try:
