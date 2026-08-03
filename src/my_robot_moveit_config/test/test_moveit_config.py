@@ -15,6 +15,18 @@ DESCRIPTION_XACRO = (
 DESCRIPTION_PACKAGE = WORKSPACE_SRC / "my_robot_description"
 CONFIG_DIR = PACKAGE_ROOT / "config"
 LAUNCH_DIR = PACKAGE_ROOT / "launch"
+INTERFACE_PACKAGE = WORKSPACE_SRC / "my_moveit_interfaces"
+POSE_COMMAND_MSG = INTERFACE_PACKAGE / "msg" / "PoseCommand.msg"
+EXPECTED_POSE_COMMAND_FIELDS = [
+    "float64 x",
+    "float64 y",
+    "float64 z",
+    "float64 roll",
+    "float64 pitch",
+    "float64 yaw",
+    "bool cartesian_path",
+    "bool sunyijie_gripper",
+]
 
 EXPECTED_ARM_JOINTS = [
     "joint1",
@@ -168,6 +180,38 @@ class MoveItConfigContractTest(unittest.TestCase):
         cls.urdf_links = {
             link.attrib["name"] for link in cls.urdf_root.findall("link")
         }
+
+    def test_pose_command_interface_uses_exact_personal_contract(self):
+        fields = [
+            line.strip()
+            for line in POSE_COMMAND_MSG.read_text(
+                encoding="utf-8"
+            ).splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+        self.assertEqual(EXPECTED_POSE_COMMAND_FIELDS, fields)
+
+        cmake = (INTERFACE_PACKAGE / "CMakeLists.txt").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("rosidl_generate_interfaces", cmake)
+        self.assertIn('\"msg/PoseCommand.msg\"', cmake)
+
+        manifest = ET.parse(INTERFACE_PACKAGE / "package.xml").getroot()
+        build_dependencies = {
+            element.text.strip()
+            for element in manifest.findall("buildtool_depend")
+            + manifest.findall("build_depend")
+        }
+        self.assertIn("ament_cmake", build_dependencies)
+        self.assertIn("rosidl_default_generators", build_dependencies)
+        self.assertEqual(
+            ["rosidl_interface_packages"],
+            [
+                element.text.strip()
+                for element in manifest.findall("member_of_group")
+            ],
+        )
 
     def test_learning_urdf_has_expected_arm_chain(self):
         active_joints = [
