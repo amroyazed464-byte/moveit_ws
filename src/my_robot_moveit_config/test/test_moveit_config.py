@@ -603,8 +603,12 @@ class MoveItConfigContractTest(unittest.TestCase):
         )
 
         limits = load_yaml(CONFIG_DIR / "joint_limits.yaml")
-        self.assertEqual(0.1, limits["default_velocity_scaling_factor"])
-        self.assertEqual(0.1, limits["default_acceleration_scaling_factor"])
+        self.assertGreater(
+            float(limits["default_velocity_scaling_factor"]), 0.0
+        )
+        self.assertGreater(
+            float(limits["default_acceleration_scaling_factor"]), 0.0
+        )
         self.assertEqual(
             set(EXPECTED_ARM_JOINTS + [GRIPPER_COMMAND_JOINT]),
             set(limits["joint_limits"]),
@@ -624,6 +628,42 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertTrue(gripper_limit["has_position_limits"])
         self.assertEqual(0.0, float(gripper_limit["min_position"]))
         self.assertEqual(0.034, float(gripper_limit["max_position"]))
+
+    def test_arm_motion_is_fast_enough_for_recording(self):
+        limits = load_yaml(CONFIG_DIR / "joint_limits.yaml")
+        velocity_scaling = float(limits["default_velocity_scaling_factor"])
+        acceleration_scaling = float(
+            limits["default_acceleration_scaling_factor"]
+        )
+
+        self.assertGreaterEqual(velocity_scaling, 0.3)
+        self.assertLessEqual(velocity_scaling, 0.5)
+        self.assertGreaterEqual(acceleration_scaling, 0.3)
+        self.assertLessEqual(acceleration_scaling, 0.5)
+
+        slowest_arm_joint_velocity = min(
+            float(limits["joint_limits"][joint]["max_velocity"])
+            for joint in EXPECTED_ARM_JOINTS
+        )
+        two_radian_motion_seconds = 2.0 / (
+            slowest_arm_joint_velocity * velocity_scaling
+        )
+        self.assertLessEqual(two_radian_motion_seconds, 7.0)
+
+        rviz = load_yaml(CONFIG_DIR / "moveit.rviz")
+        motion_planning = next(
+            display
+            for display in rviz["Visualization Manager"]["Displays"]
+            if display.get("Class") == "moveit_rviz_plugin/MotionPlanning"
+        )
+        self.assertEqual(
+            velocity_scaling,
+            float(motion_planning.get("Velocity_Scaling_Factor", 0.0)),
+        )
+        self.assertEqual(
+            acceleration_scaling,
+            float(motion_planning.get("Acceleration_Scaling_Factor", 0.0)),
+        )
 
     def test_gripper_controller_motion_is_visible_in_recording(self):
         limits = load_yaml(CONFIG_DIR / "joint_limits.yaml")
@@ -730,7 +770,7 @@ class MoveItConfigContractTest(unittest.TestCase):
         for joint_name in MATURE_MODEL_JOINTS:
             self.assertNotIn(joint_name, config_text)
 
-    def test_rviz_defaults_match_assignment_recording_requirements(self):
+    def test_rviz_shows_executed_robot_without_planning_ghosts(self):
         rviz = load_yaml(CONFIG_DIR / "moveit.rviz")
         displays = rviz["Visualization Manager"]["Displays"]
         motion_planning = next(
@@ -740,8 +780,28 @@ class MoveItConfigContractTest(unittest.TestCase):
         )
 
         self.assertFalse(motion_planning["Planned Path"]["Loop Animation"])
-        self.assertTrue(
-            motion_planning["Scene Robot"]["Links"]["tool_link"]["Show Trail"]
+        self.assertIs(
+            False,
+            motion_planning["Planned Path"].get("Show Robot Visual", True),
+        )
+        self.assertIs(
+            False,
+            motion_planning["Planned Path"].get("Show Trail", True),
+        )
+
+        scene_robot = motion_planning["Scene Robot"]
+        self.assertEqual(1.0, float(scene_robot["Robot Alpha"]))
+        self.assertIs(True, scene_robot.get("Show Robot Visual", False))
+        self.assertFalse(
+            scene_robot["Links"]["tool_link"]["Show Trail"]
+        )
+
+        planning_request = motion_planning.get("Planning Request", {})
+        self.assertIs(
+            False, planning_request.get("Query Start State", True)
+        )
+        self.assertIs(
+            False, planning_request.get("Query Goal State", True)
         )
 
 if __name__ == "__main__":

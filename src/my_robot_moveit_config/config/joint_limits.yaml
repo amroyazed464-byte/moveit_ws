@@ -1,6 +1,6 @@
 # MoveIt overrides and augments the limits declared in arm.xacro.
-default_velocity_scaling_factor: 0.1
-default_acceleration_scaling_factor: 0.1
+default_velocity_scaling_factor: 0.4
+default_acceleration_scaling_factor: 0.4
 
 joint_limits:
   joint1:

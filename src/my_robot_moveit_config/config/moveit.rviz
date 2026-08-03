@@ -13,12 +13,22 @@ Visualization Manager:
     - Class: rviz_default_plugins/Grid
       Name: Grid
       Value: true
-    - Class: moveit_rviz_plugin/MotionPlanning
+    - Acceleration_Scaling_Factor: 0.4
+      Class: moveit_rviz_plugin/MotionPlanning
       Name: MotionPlanning
       Planned Path:
         Loop Animation: false
+        Robot Alpha: 0
+        Show Robot Collision: false
+        Show Robot Visual: false
+        Show Trail: false
         State Display Time: 0.05 s
         Trajectory Topic: display_planned_path
+      Planning Request:
+        Goal State Alpha: 0
+        Query Goal State: false
+        Query Start State: false
+        Start State Alpha: 0
       Planning Scene Topic: monitored_planning_scene
       Robot Description: robot_description
       Scene Geometry:
@@ -28,10 +38,13 @@ Visualization Manager:
           tool_link:
             Alpha: 1
             Show Axes: false
-            Show Trail: true
+            Show Trail: false
             Value: true
-        Robot Alpha: 0.5
+        Robot Alpha: 1
+        Show Robot Collision: false
+        Show Robot Visual: true
       Value: true
+      Velocity_Scaling_Factor: 0.4
   Global Options:
     Fixed Frame: base_link
   Tools:
