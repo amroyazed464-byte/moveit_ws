@@ -12,6 +12,8 @@ ros2 launch my_robot_moveit_config demo.launch.py
 In a second sourced terminal, publish the following commands one at a time.
 The personalized field follows the assignment convention:
 `sunyijie_gripper: true` closes the gripper and `false` opens it.
+The sequence below was validated from the fake hardware's initial pose. Restart
+the demo launch before a retake so the recording starts from that same pose.
 
 ## Recording sequence
 
@@ -36,13 +38,13 @@ ros2 topic pub -1 /pose_command my_moveit_interfaces/msg/PoseCommand "{x: 0.7, y
 4. Rotate around the base and transfer to the new position:
 
 ```bash
-ros2 topic pub -1 /pose_command my_moveit_interfaces/msg/PoseCommand "{x: 0.6, y: -0.7, z: 0.7, roll: 3.14, pitch: 0.0, yaw: 0.0, cartesian_path: false, sunyijie_gripper: true}"
+ros2 topic pub -1 /pose_command my_moveit_interfaces/msg/PoseCommand "{x: 0.7, y: -0.5, z: 0.7, roll: 3.14, pitch: 0.0, yaw: 0.0, cartesian_path: false, sunyijie_gripper: true}"
 ```
 
 5. Descend vertically and open near the ground:
 
 ```bash
-ros2 topic pub -1 /pose_command my_moveit_interfaces/msg/PoseCommand "{x: 0.6, y: -0.7, z: 0.4, roll: 3.14, pitch: 0.0, yaw: 0.0, cartesian_path: true, sunyijie_gripper: false}"
+ros2 topic pub -1 /pose_command my_moveit_interfaces/msg/PoseCommand "{x: 0.7, y: -0.5, z: 0.4, roll: 3.14, pitch: 0.0, yaw: 0.0, cartesian_path: true, sunyijie_gripper: false}"
 ```
 
 Wait for each one-shot publisher to report that the message was published and
