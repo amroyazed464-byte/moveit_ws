@@ -647,6 +647,7 @@ class MoveItConfigContractTest(unittest.TestCase):
         self.assertIn("joint_trajectory_controller", runtime_dependencies)
         self.assertIn("joint_state_broadcaster", runtime_dependencies)
         self.assertIn("gripper_controllers", runtime_dependencies)
+        self.assertIn("my_robot_commander", runtime_dependencies)
 
     def test_all_yaml_files_have_unique_keys(self):
         for path in sorted(CONFIG_DIR.glob("*.yaml")):
@@ -682,6 +683,14 @@ class MoveItConfigContractTest(unittest.TestCase):
             len(helper_calls),
             "spawn launch must call generate_spawn_controllers_launch once",
         )
+
+        demo_source = (LAUNCH_DIR / "demo.launch.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("from launch_ros.actions import Node", demo_source)
+        self.assertIn('package="my_robot_commander"', demo_source)
+        self.assertIn('executable="my_robot_commander"', demo_source)
+        self.assertIn("parameters=[moveit_config.to_dict()]", demo_source)
 
     def test_mature_model_joint_names_are_absent(self):
         config_text = "\n".join(
