@@ -29,6 +29,11 @@ ros2 launch heritage_hall hall.launch.py
 不构建也能启动：`bash src/heritage_hall/scripts/start_hall.sh`。
 模型及纹理全部本地提供，不需要 Gazebo Fuel 下载。
 
+启动脚本已为当前 VMware 虚拟机固定使用 Mesa 软件渲染
+（`LIBGL_ALWAYS_SOFTWARE=1`）和 X11 兼容后端（`QT_QPA_PLATFORM=xcb`），
+以避免 SVGA3D 硬件渲染时的持续闪烁。仍使用上述启动命令，无需手动设置环境变量。
+软件渲染可能增加 CPU 占用并降低显示帧率；这些设置仅作用于该脚本启动的仿真进程。
+
 ## 重建与检查
 
 ```bash
@@ -47,3 +52,4 @@ GZ_SIM_RESOURCE_PATH="$PWD/src" gz sdf -k src/heritage_hall/worlds/heritage_hall
 - 两项资源/通道检查通过，既有 MoveIt 配置的 20 项测试通过。
 - Gazebo 运行中投放半径 0.15m 测试球：地板接触中心高度 0.150m，展柜 2.050m，墙顶 4.350m，均与几何预期一致；测试球已移除。
 - 已实际加载 GUI，并通过 Gazebo 相机渲染核对地面文字、分区与设施布局。
+- 软件渲染启动后，渲染器确认为 Mesa llvmpipe；用户确认当前窗口不再闪烁。
