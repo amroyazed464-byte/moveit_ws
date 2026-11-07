@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.8)
+project(heritage_hall)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY launch worlds meshes materials DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/start_hall.sh DESTINATION lib/${PROJECT_NAME})
+ament_package()

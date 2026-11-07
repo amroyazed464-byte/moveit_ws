@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>heritage_hall</name>
+  <version>0.1.0</version>
+  <description>Image-derived intangible cultural heritage exhibition hall for Gazebo Harmonic.</description>
+  <maintainer email="amroyazed464@gmail.com">jay</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>
