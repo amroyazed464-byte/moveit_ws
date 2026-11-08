@@ -1,0 +1,69 @@
+{
+  "scenario": "actual five-zone navigation; simulated subtitle acknowledgements and quiz answers",
+  "arrivals": {
+    "overview": {
+      "world_pose": {
+        "x": -13.412456633583844,
+        "y": -0.057775405531306036,
+        "yaw": 0.24812655129415953
+      },
+      "distance_to_stop": 0.19624095334820246,
+      "localization_error": 0.10264646054717222
+    },
+    "craft": {
+      "world_pose": {
+        "x": -2.072803510465494,
+        "y": 4.673524397314097,
+        "yaw": 1.3332337140383206
+      },
+      "distance_to_stop": 0.14593296135850078,
+      "localization_error": 0.032731262126766504
+    },
+    "masterpieces": {
+      "world_pose": {
+        "x": -1.7561532113821163,
+        "y": -7.1867404569266355,
+        "yaw": -1.8314042688785153
+      },
+      "distance_to_stop": 0.26886610127801924,
+      "localization_error": 0.11383933314088701
+    },
+    "history": {
+      "world_pose": {
+        "x": 6.966516013357611,
+        "y": -1.103711531362873,
+        "yaw": 0.26742565076532215
+      },
+      "distance_to_stop": 0.10898283855314025,
+      "localization_error": 0.04896302597653483
+    },
+    "interactive": {
+      "world_pose": {
+        "x": 9.863988472696175,
+        "y": 5.639980767930264,
+        "yaw": 1.3117864842305023
+      },
+      "distance_to_stop": 0.21001259531682204,
+      "localization_error": 0.09835220403345885
+    }
+  },
+  "passed": true,
+  "elapsed_seconds": 441.451556495,
+  "home_distance": 0.2494409991805266,
+  "stats": {
+    "sessions": 1,
+    "visitors": 1,
+    "zones_completed": 5,
+    "questions": 0,
+    "answered_questions": 0,
+    "unknown_questions": 0,
+    "quiz_attempts": 5,
+    "quiz_correct": 5,
+    "faults": 0,
+    "manual_takeovers": 0,
+    "pauses": 0,
+    "repeats": 0,
+    "skipped_zones": 0,
+    "completed": 1
+  }
+}

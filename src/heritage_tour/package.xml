@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>heritage_tour</name><version>0.1.0</version>
+  <description>Offline complete museum guide simulation and operator console.</description>
+  <maintainer email="amroyazed464@gmail.com">jay</maintainer><license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend><buildtool_depend>ament_cmake_python</buildtool_depend>
+  <depend>gz_transport_vendor</depend><depend>gz_msgs_vendor</depend>
+  <depend>gz_sim_vendor</depend>
+  <exec_depend>heritage_robot</exec_depend><exec_depend>heritage_hall</exec_depend>
+  <exec_depend>rclpy</exec_depend><exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>nav2_msgs</exec_depend><exec_depend>tf2_ros</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend><exec_depend>nav_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend><exec_depend>std_msgs</exec_depend>
+  <exec_depend>lifecycle_msgs</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend><exec_depend>launch_ros</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

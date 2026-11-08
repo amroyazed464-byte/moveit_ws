@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "fault_transitions": 8,
+  "restores": 7,
+  "scan_fresh": true,
+  "scene_linkage": {
+    "ready": true,
+    "ok": true,
+    "motion_ok": true,
+    "transport_alive": true,
+    "error": ""
+  }
+}

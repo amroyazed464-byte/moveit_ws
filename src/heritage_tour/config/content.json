@@ -1,0 +1,482 @@
+{
+  "title": "非遗之旅 · 五区示范导览",
+  "exhibition_notice": "本展馆为仿真示范策展。展板、造型与停靠点用于讲解演示，不代表任何真实博物馆的馆藏、作者、年代或真伪鉴定；项目知识只引用下列公开来源。到访、掉队、听不清及电量按钮为模拟输入。",
+  "exhibition_notice_en": "This is a simulated curatorial demonstration. Displays do not identify real museum holdings, artists, dates or authenticity. Visitor and fault inputs are simulated; educational facts are restricted to the listed sources.",
+  "home": [
+    -13.27,
+    -7.73,
+    1.5708
+  ],
+  "knowledge_boundary": "仅回答配置的问题及明确同义问法；无核验来源、价格、鉴定、真实馆藏与个体信息请咨询工作人员。不会联网生成额外答案。",
+  "sources": [
+    {
+      "id": "unesco_definition",
+      "title": "UNESCO：What is Intangible Cultural Heritage?",
+      "url": "https://ich.unesco.org/en/what-is-intangible-cultural-heritage-00003",
+      "checked_on": "2026-11-08",
+      "supports": "活态传承、社区认同、知识技能及文化多样性"
+    },
+    {
+      "id": "unesco_domains",
+      "title": "UNESCO：Intangible Heritage domains",
+      "url": "https://ich.unesco.org/en/intangible-heritage-domains-00052",
+      "checked_on": "2026-11-08",
+      "supports": "公约五个领域及领域交叉"
+    },
+    {
+      "id": "unesco_craft",
+      "title": "UNESCO：Traditional craftsmanship",
+      "url": "https://ich.unesco.org/en/traditional-craftsmanship-00057",
+      "checked_on": "2026-11-08",
+      "supports": "保护着重技能知识及手艺人的持续实践与传授"
+    },
+    {
+      "id": "unesco_print",
+      "title": "UNESCO：中国雕版印刷技艺",
+      "url": "https://ich.unesco.org/en/RL/china-engraved-block-printing-technique-00229",
+      "checked_on": "2026-11-08",
+      "supports": "2009年列入、协作、刻版校样上墨刷印",
+      "verification": "官方搜索索引返回正文"
+    },
+    {
+      "id": "unesco_xuan",
+      "title": "UNESCO：宣纸传统制作技艺",
+      "url": "https://ich.unesco.org/en/RL/traditional-handicrafts-of-making-xuan-paper-00201",
+      "checked_on": "2026-11-08",
+      "supports": "2009年列入、泾县、青檀皮稻草、手工工序与书画用途",
+      "verification": "官方搜索索引返回正文；直接访问可能出现验证页"
+    },
+    {
+      "id": "china_list",
+      "title": "中国非物质文化遗产网：国家级代表性项目名录",
+      "url": "https://www.ihchina.cn/Project/Index",
+      "checked_on": "2026-11-08",
+      "supports": "我国名录保护目的与十大门类；不使用动态数量"
+    },
+    {
+      "id": "nlc_cut",
+      "title": "国家图书馆：中国剪纸",
+      "url": "https://ich.nlc.cn/unesco/detail/8",
+      "checked_on": "2026-11-08",
+      "supports": "剪刀刻刀、民俗活动、文化历史信息与社会价值"
+    },
+    {
+      "id": "cflas_cut",
+      "title": "中国民间文艺家协会：《中国民间剪纸集成》",
+      "url": "https://www.cflas.com.cn/mx/MXDT/8a814da24d9847f8014d9918f5eb1316.html",
+      "checked_on": "2026-11-08",
+      "supports": "剪纸的地域差异、记录创作传播张贴全过程及民俗内涵"
+    },
+    {
+      "id": "china_training",
+      "title": "中国非遗网：传承人群研修研习培训计划通知",
+      "url": "https://www.ihchina.cn/art/detail/id/8888.html",
+      "checked_on": "2026-11-08",
+      "supports": "手工实践、研修与跨界交流，在秉承传统基础上提高设计制作水平"
+    },
+    {
+      "id": "china_education",
+      "title": "中国非遗网：让非遗在校园扎根生长",
+      "url": "https://www.ihchina.cn/news_1_details/31535.html",
+      "checked_on": "2026-11-08",
+      "supports": "兴趣启蒙、技能教育、传承人与学校协作"
+    }
+  ],
+  "zones": [
+    {
+      "id": "overview",
+      "name": "非遗概览区",
+      "name_en": "Living Heritage Overview",
+      "pose": [
+        -13.6,
+        0,
+        0
+      ],
+      "color": "#38bdf8",
+      "source_ids": [
+        "unesco_definition",
+        "unesco_domains",
+        "china_list"
+      ],
+      "narrations": {
+        "child": "【基础】非遗像一份会动的文化礼物。【背景】长辈教给晚辈，再传给下一代。【工艺】不只看做好的物品，也要认识会做的人。【文化】想一想，家里有什么代代相传的歌谣或手艺？",
+        "general": "【基础】非遗包括活着的实践、表达、知识与技能。【背景】联合国教科文组织列出口头传统、表演、社会实践、自然知识和传统手工艺五个领域。【工艺】本示范馆从手艺的过程切入。【文化】不同领域可以相互交织，请尊重实践者的解释。",
+        "deep": "【基础】五个仿真展区是导览路线，并非非遗分类。【背景】我国国家级名录采用十大门类，和公约的五领域框架不同。【工艺】观展时可追问材料、动作与传授方式。【文化】列入名录帮助明确保护对象，不能替代持续学习和实践。"
+      },
+      "english": {
+        "child": "Basics: Living heritage is a cultural gift we can practise. Background: Older people pass it to younger people. Craft: Look for the maker as well as the object. Culture: What song or skill does your family share?",
+        "general": "Basics: Heritage includes living practices and skills. Background: UNESCO describes five broad domains. Craft: This demonstration follows how skills are practised. Culture: Traditions can cross domains; listen respectfully to their practitioners.",
+        "deep": "Basics: Our five stops are a tour design. Background: China's national inventory uses ten categories, distinct from UNESCO's five domains. Craft: Ask about materials and teaching. Culture: An inventory identifies what needs safeguarding; practice keeps it alive."
+      },
+      "task": "找到一个你想学习的手艺，并说明为什么。",
+      "task_en": "Name one skill you would like to learn and explain why.",
+      "quiz": {
+        "id": "overview_quiz",
+        "question": "理解非遗，应该同时关注什么？",
+        "question_en": "What should we consider when exploring living heritage?",
+        "options": [
+          {
+            "id": "A",
+            "text": "只看物品价格",
+            "en": "Only an object's price"
+          },
+          {
+            "id": "B",
+            "text": "实践者及传承的知识技能",
+            "en": "Practitioners and transmitted knowledge"
+          }
+        ],
+        "answer": "B",
+        "reason": "非遗的价值包含代代相传的知识技能，以及创造、维护它的社区。",
+        "reason_en": "Transmitted knowledge and its practising communities are central.",
+        "source_ids": [
+          "unesco_definition"
+        ]
+      },
+      "qa": [
+        {
+          "question": "什么是非遗？",
+          "question_en": "What is intangible cultural heritage?",
+          "aliases": [
+            "非遗是什么",
+            "什么是非物质文化遗产",
+            "What is living heritage"
+          ],
+          "answer": "它包括由社区认同并代代传承的活态实践、表达、知识和技能。",
+          "answer_en": "It includes living practices, expressions, knowledge and skills recognized and transmitted by communities.",
+          "source_ids": [
+            "unesco_definition"
+          ]
+        },
+        {
+          "question": "非遗有哪五个领域？",
+          "question_en": "What are UNESCO's five domains?",
+          "aliases": [
+            "非遗有哪些领域",
+            "五个领域是什么"
+          ],
+          "answer": "口头传统与表达、表演艺术、社会实践仪式与节庆、有关自然和宇宙的知识实践、传统手工艺；一个项目也可能跨领域。",
+          "answer_en": "Oral traditions, performing arts, social practices and festivities, knowledge of nature and the universe, and traditional craftsmanship. Domains can overlap.",
+          "source_ids": [
+            "unesco_domains"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "craft",
+      "name": "传统技艺区",
+      "name_en": "Traditional Craft Skills",
+      "pose": [
+        -2,
+        4.8,
+        1.5708
+      ],
+      "color": "#f59e0b",
+      "source_ids": [
+        "unesco_print",
+        "unesco_craft",
+        "china_training"
+      ],
+      "narrations": {
+        "child": "【基础】这一站用雕版印刷讲手艺。【背景】一个印好的图案背后有人协作。【工艺】刻好木版，再上墨把图印到纸上。【文化】观察任务：如果只留下纸，却没人会印，会少掉什么？这里不操作真实刻刀。",
+        "general": "【基础】雕版印刷让木版上的凸起文字图案着墨成印。【背景】中国雕版印刷技艺于2009年列入联合国教科文组织代表作名录。【工艺】写样、刻版、试印校正、上墨刷印相互配合。【文化】本区示意只讲方法，不指认真实馆藏。",
+        "deep": "【基础】保护手工艺，需要关注技艺和知识。【背景】成品能展示结果，却不能独自保存匠人的经验。【工艺】把校样纠错与协作也纳入观察，比较每步对成品的影响。【文化】传承培训把实践与交流结合；我们的按钮体验只提供学习线索，不能替代跟随师傅训练。"
+      },
+      "english": {
+        "child": "Basics: We explore block printing. Background: Makers work together. Craft: Ink a carved block and print on paper. Culture: If nobody knew how to print, what would be lost? No real cutting tools are used here.",
+        "general": "Basics: Raised marks on a carved block carry ink. Background: This Chinese technique was inscribed in 2009. Craft: Preparing, carving, proofing and printing connect. Culture: Our demonstration explains a process, without claiming a museum object.",
+        "deep": "Basics: Safeguard knowledge alongside products. Background: Objects cannot preserve every practical judgement. Craft: Study correction and collaboration as well as carving. Culture: Training combines practice and exchange. Buttons introduce a subject; sustained learning with practitioners develops skill."
+      },
+      "task": "按顺序说出刻版、上墨、刷印三个环节。",
+      "task_en": "Put carving, inking and printing in order.",
+      "quiz": {
+        "id": "craft_quiz",
+        "question": "木版完成后，为检查问题应该先做什么？",
+        "question_en": "How can makers check a carved block?",
+        "options": [
+          {
+            "id": "A",
+            "text": "试印并校正",
+            "en": "Make a proof and correct it"
+          },
+          {
+            "id": "B",
+            "text": "不检查直接批量印",
+            "en": "Skip checks and print everything"
+          }
+        ],
+        "answer": "A",
+        "reason": "官方项目介绍包含试印与校正环节。",
+        "reason_en": "The official description includes proofing and correction.",
+        "source_ids": [
+          "unesco_print"
+        ]
+      },
+      "qa": [
+        {
+          "question": "雕版印刷怎样把字印到纸上？",
+          "question_en": "How does block printing transfer a design?",
+          "aliases": [
+            "雕版印刷怎么印",
+            "雕版印刷的过程"
+          ],
+          "answer": "木版刻成凸起的文字图案，经过试印校正后上墨，再手工刷印到纸上。",
+          "answer_en": "Carved raised designs are proofed, corrected, inked and printed onto paper by hand.",
+          "source_ids": [
+            "unesco_print"
+          ]
+        },
+        {
+          "question": "保护传统手工艺只是保存成品吗？",
+          "question_en": "Is safeguarding craftsmanship only about keeping objects?",
+          "aliases": [
+            "为什么要保护手艺",
+            "保护手工艺保护什么"
+          ],
+          "answer": "还要支持手艺人继续实践，并将技能和知识教给他人。",
+          "answer_en": "It also means supporting artisans to practise and pass their skills and knowledge on.",
+          "source_ids": [
+            "unesco_craft"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "masterpieces",
+      "name": "代表作品赏析区",
+      "name_en": "Paper-cut Appreciation",
+      "pose": [
+        -2,
+        -7.3,
+        -1.5708
+      ],
+      "color": "#fb7185",
+      "source_ids": [
+        "nlc_cut",
+        "cflas_cut"
+      ],
+      "narrations": {
+        "child": "【基础】剪纸能把纸变成好看的图案。【背景】它也走进人们的日常和民俗活动。【工艺】找一找画面里留下的纸和剪开的空处。【文化】本区是示意赏析，没有真实大师作品；你愿意用什么图案表达祝福？",
+        "general": "【基础】剪纸用剪刀或刻刀在纸上形成纹样。【背景】国家图书馆的项目介绍强调它与民俗生活的联系。【工艺】观察轮廓、疏密与留白，是本示范区的赏析任务。【文化】作品不只是装饰，也能表达生活愿望与审美情趣。",
+        "deep": "【基础】赏析要把图案放回使用情境。【背景】中国民间文艺家协会的记录工作关注创作、传播和张贴全过程。【工艺】请比较不同图案如何安排空间，不把本区图形当成某地固定规范。【文化】地域间的文化功能与纹饰可能不同，具体含义应由当地实践者及可靠资料解释。"
+      },
+      "english": {
+        "child": "Basics: Paper can become a picture. Background: Paper-cuts join daily and festive life. Craft: Spot the paper that remains and the spaces cut away. Culture: These are demonstration designs. What picture would you choose for a good wish?",
+        "general": "Basics: Scissors or knives shape paper patterns. Background: The National Library connects this art with folk life. Craft: Our task explores outlines and spacing. Culture: Decoration can also express hopes and aesthetic choices.",
+        "deep": "Basics: Consider how a design is used. Background: Documentation follows making, sharing and displaying. Craft: Compare spatial choices without treating our diagrams as regional rules. Culture: Functions and motifs vary; consult practitioners before assigning a precise meaning."
+      },
+      "task": "选择一个示意纹样，描述轮廓或留白；不要猜作者与年代。",
+      "task_en": "Describe a demonstration pattern's outline or spacing, without guessing an artist or date.",
+      "quiz": {
+        "id": "masterpieces_quiz",
+        "question": "解释一幅剪纸的文化含义，哪种做法更合适？",
+        "question_en": "How should we interpret a paper-cut's cultural meaning?",
+        "options": [
+          {
+            "id": "A",
+            "text": "所有地方含义都完全一样",
+            "en": "Assume all places use identical meanings"
+          },
+          {
+            "id": "B",
+            "text": "结合当地习俗和使用情境",
+            "en": "Consider local customs and context"
+          }
+        ],
+        "answer": "B",
+        "reason": "剪纸的地域文化功能与纹饰存在差异，不能一概而论。",
+        "reason_en": "Regional functions and motifs differ; context matters.",
+        "source_ids": [
+          "cflas_cut"
+        ]
+      },
+      "qa": [
+        {
+          "question": "剪纸通常用什么工具？",
+          "question_en": "What tools are used for paper-cutting?",
+          "aliases": [
+            "剪纸用什么工具",
+            "剪纸怎么做"
+          ],
+          "answer": "通常用剪刀或刻刀在纸上剪刻纹样；真实工具体验应由工作人员安排。",
+          "answer_en": "Scissors or carving knives cut patterns into paper. Staff should arrange any real tool activity.",
+          "source_ids": [
+            "nlc_cut"
+          ]
+        },
+        {
+          "question": "各地剪纸都一样吗？",
+          "question_en": "Are paper-cut traditions identical everywhere?",
+          "aliases": [
+            "剪纸有地域差别吗",
+            "不同地方剪纸一样吗"
+          ],
+          "answer": "不同地域的文化功能与纹饰造型存在差异，需要结合民俗与使用情境理解。",
+          "answer_en": "Regional functions and patterns differ and should be understood in their folk and social context.",
+          "source_ids": [
+            "cflas_cut"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "name": "历史传承区",
+      "name_en": "Transmission Across Generations",
+      "pose": [
+        7,
+        -1,
+        0
+      ],
+      "color": "#a78bfa",
+      "source_ids": [
+        "unesco_xuan",
+        "china_list",
+        "unesco_definition"
+      ],
+      "narrations": {
+        "child": "【基础】这一站讲宣纸和学手艺的人。【背景】我们把接力传授画成一条示意时间线。【工艺】树皮、稻草经过许多手工步骤才能成纸。【文化】请说一说：做纸的人和写字画画的人，怎样一起让文化延续？",
+        "general": "【基础】宣纸常用于书法、绘画与印书。【背景】宣纸传统制作技艺于2009年列入联合国教科文组织代表作名录。【工艺】青檀皮与稻草经过浸泡、制浆等手工环节。【文化】本区讲传承过程，不宣称展示了某年某人制作的真品。",
+        "deep": "【基础】传承不是只给成品标上一个年代。【背景】官方项目介绍把泾县的环境、材料和口传经验相联系。【工艺】制作需要很多工序，学习依赖长期实践。【文化】示意时间线中的名录节点说明保护行动；持续有人学习、实践和传授，才让知识进入未来。"
+      },
+      "english": {
+        "child": "Basics: Meet Xuan paper and its makers. Background: Our timeline pictures a learning relay. Craft: Bark and straw pass through many manual stages. Culture: How do papermakers and artists help each other keep culture alive?",
+        "general": "Basics: Xuan paper serves calligraphy, painting and printing. Background: Its traditional craft was inscribed in 2009. Craft: Blue sandalwood bark and rice straw undergo manual processing. Culture: This display describes transmission and makes no claim about an original object.",
+        "deep": "Basics: Transmission exceeds an object's date. Background: The official account relates Jing County's environment and inherited knowledge. Craft: Many stages require lasting practice. Culture: Inventory dates mark safeguarding actions; continued learning carries skills forward."
+      },
+      "task": "把材料、制作人、学习者三个角色连成一条传承链。",
+      "task_en": "Connect materials, makers and learners into a chain of transmission.",
+      "quiz": {
+        "id": "history_quiz",
+        "question": "宣纸传统制作的重要原料包括什么？",
+        "question_en": "Which materials are used in traditional Xuan papermaking?",
+        "options": [
+          {
+            "id": "A",
+            "text": "青檀皮与稻草",
+            "en": "Blue sandalwood bark and rice straw"
+          },
+          {
+            "id": "B",
+            "text": "只有塑料颗粒",
+            "en": "Only plastic pellets"
+          }
+        ],
+        "answer": "A",
+        "reason": "联合国教科文组织项目页介绍了青檀皮与稻草等原料。",
+        "reason_en": "The UNESCO account identifies blue sandalwood bark and rice straw.",
+        "source_ids": [
+          "unesco_xuan"
+        ]
+      },
+      "qa": [
+        {
+          "question": "宣纸主要用来做什么？",
+          "question_en": "What is Xuan paper used for?",
+          "aliases": [
+            "宣纸有什么用途",
+            "宣纸做什么用"
+          ],
+          "answer": "它广泛用于书法、绘画和书籍印刷。",
+          "answer_en": "It is widely used for calligraphy, painting and book printing.",
+          "source_ids": [
+            "unesco_xuan"
+          ]
+        },
+        {
+          "question": "国家级非遗名录有什么作用？",
+          "question_en": "What is the purpose of China's national heritage inventory?",
+          "aliases": [
+            "非遗名录有什么用",
+            "为什么建立非遗名录"
+          ],
+          "answer": "名录确认保护对象，帮助把资源用于有重要价值的非遗项目保护。",
+          "answer_en": "It identifies safeguarding subjects and helps focus resources on significant heritage practices.",
+          "source_ids": [
+            "china_list"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interactive",
+      "name": "互动体验区",
+      "name_en": "Learning and Participation",
+      "pose": [
+        10,
+        5.8,
+        1.5708
+      ],
+      "color": "#34d399",
+      "source_ids": [
+        "china_training",
+        "china_education",
+        "unesco_craft"
+      ],
+      "narrations": {
+        "child": "【基础】现在把看见的变成一个小任务。【背景】学习手艺可以从兴趣开始。【工艺】请先说步骤、再做屏幕答题；真实工具要听工作人员安排。【文化】完成任务卡后，告诉同伴你最想继续学什么。答题记录只是本次体验。",
+        "general": "【基础】这一区提供离线任务卡与文字问答。【背景】非遗教育把兴趣启蒙和技能学习连接起来。【工艺】按钮帮助梳理顺序，不能代替亲手练习。【文化】我们的策展建议是尊重传承人、核对出处，并参加合适的学习活动；具体课程以工作人员说明为准。",
+        "deep": "【基础】参与式学习应能回到真实实践。【背景】传承人群培训强调秉承传统并交流学习，学校也能与传承人协作。【工艺】任务卡记录你识别的步骤和答题结果，不评价真实技艺水平。【文化】本系统只统计会话内事件，不做人脸识别或真实语音采集；需要深入学习时，请由人工引介。"
+      },
+      "english": {
+        "child": "Basics: Turn what you saw into a task. Background: Interest can begin learning. Craft: Describe a step and answer a screen question. Follow staff for real tools. Culture: Tell a companion what you would like to learn next.",
+        "general": "Basics: These tasks and questions work offline. Background: Heritage education connects interest and skills. Craft: Buttons help organize steps but cannot replace practice. Culture: Our curatorial suggestion is to respect practitioners, check sources and seek suitable learning activities.",
+        "deep": "Basics: Participation should lead toward practice. Background: Training and schools can connect learners with practitioners. Craft: Task records describe this experience, not mastery. Culture: This system records session events without face recognition or microphone capture. Staff can introduce deeper learning."
+      },
+      "task": "完成最后一题，选择一个想进一步学习的项目，向工作人员咨询。",
+      "task_en": "Complete the final question and ask staff about a skill you want to study.",
+      "quiz": {
+        "id": "interactive_quiz",
+        "question": "做完屏幕任务，能说明什么？",
+        "question_en": "What does completing this screen task demonstrate?",
+        "options": [
+          {
+            "id": "A",
+            "text": "已经掌握所有真实技艺",
+            "en": "Mastery of every real craft"
+          },
+          {
+            "id": "B",
+            "text": "完成一次学习体验，还可继续实践",
+            "en": "A learning experience, with more practice ahead"
+          }
+        ],
+        "answer": "B",
+        "reason": "手艺需要持续实践和传授；屏幕任务是本示范馆的入门活动。",
+        "reason_en": "Skills need ongoing practice and transmission; this task is an introduction.",
+        "source_ids": [
+          "unesco_craft"
+        ]
+      },
+      "qa": [
+        {
+          "question": "普通人可以怎样参与非遗学习？",
+          "question_en": "How can a visitor begin learning about heritage?",
+          "aliases": [
+            "我怎么学习非遗",
+            "怎样参加非遗学习"
+          ],
+          "answer": "可以从兴趣启蒙和有指导的学习活动入手。具体可参加的课程，请工作人员核实安排。",
+          "answer_en": "Begin with introductory and guided learning. Ask staff to verify which activities are actually available.",
+          "source_ids": [
+            "china_education"
+          ]
+        },
+        {
+          "question": "传统工艺可以和现代设计交流吗？",
+          "question_en": "Can traditional crafts engage with modern design?",
+          "aliases": [
+            "非遗能创新吗",
+            "传统工艺与现代设计"
+          ],
+          "answer": "传承人群研修研习培训计划鼓励在秉承传统的基础上，通过手工实践与跨界交流提高设计制作水平。",
+          "answer_en": "The training programme encourages practice and exchange to develop design and making while respecting tradition.",
+          "source_ids": [
+            "china_training"
+          ]
+        }
+      ]
+    }
+  ]
+}

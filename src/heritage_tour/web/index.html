@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>文脉 · 非遗导览</title>
+  <style>
+    :root{--paper:#f5f2ea;--white:#fffefa;--ink:#22332e;--muted:#69766e;--line:#e4e4d8;--gold:#b28b42;--gold-light:#f4ead4;--green:#31745e;--red:#a74236;--red-light:#fbece6;--shadow:0 10px 30px #273c2d06}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 "Microsoft YaHei","PingFang SC",sans-serif}button,input,select{font:inherit}button,a,input,select{outline-offset:4px}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);padding:9px 15px;transition:background .15s}button:hover:enabled{background:#efefe6}button:disabled{opacity:.4;cursor:not-allowed}button.primary{background:var(--ink);border-color:var(--ink);color:white}button.primary:hover:enabled{background:#385347}button.danger{color:var(--red);border-color:#dfc9be}button.small{padding:5px 11px;font-size:13px}input,select{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink);max-width:100%}a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}h1,h2,h3,p{margin:0}h2{font-size:17px;font-weight:650}h3{font-size:14px}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:bold}.muted{color:var(--muted)}.tiny{font-size:12px}.mono{font-variant-numeric:tabular-nums}.topbar{height:90px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 36px;background:var(--white);gap:20px}.brand{display:flex;gap:14px;align-items:center}.seal{height:46px;width:46px;border:1px solid var(--gold);color:var(--gold);display:grid;place-content:center;font:24px Georgia,serif;border-radius:4px}.brand h1{font-size:22px;letter-spacing:.12em}.header-right{display:flex;align-items:center;gap:20px}.pill{display:inline-flex;gap:7px;align-items:center;font-size:12px;background:#ecefe8;border:1px solid var(--line);border-radius:99px;padding:5px 11px;white-space:nowrap}.dot{width:7px;height:7px;border-radius:100%;background:var(--muted)}.pill.good .dot{background:var(--green)}.pill.bad{color:var(--red);background:var(--red-light);border-color:#ead4c8}.pill.bad .dot{background:var(--red)}.layout{max-width:1600px;margin:auto;padding:26px 36px 35px}.intro{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.intro h2{font-size:27px;letter-spacing:.04em;font-weight:600}.intro p{font-size:13px;margin-top:4px;color:var(--muted)}.sim-label{font-size:12px;border-left:3px solid var(--gold);padding:4px 10px;background:var(--gold-light);color:#705927;max-width:450px}.alert{border:1px solid #e8c4b8;background:var(--red-light);padding:12px 16px;border-radius:10px;color:var(--red);margin-bottom:16px}.alert[hidden]{display:none}.grid{display:grid;grid-template-columns:minmax(0,1.48fr) minmax(330px,1fr);gap:20px}.column{display:flex;flex-direction:column;gap:20px;min-width:0}.card{background:var(--white);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}.card-head{padding:17px 21px;display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line)}.card-body{padding:20px 21px}.map-container{position:relative;background:#edf0e7;padding:10px 15px}.map-container canvas{display:block;width:100%;height:auto;aspect-ratio:35.4 / 22}.map-note{font-size:11px;padding:6px 10px;background:#fffdf3dd;border-radius:5px;position:absolute;left:25px;bottom:18px}.legend{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:11px 21px;font-size:12px;color:var(--muted)}.legend i{display:inline-block;height:8px;width:8px;border-radius:50%;margin-right:6px;background:var(--gold)}.legend .robot{background:var(--green)}.legend .visitor{background:#618ca8}.legend .path{width:18px;height:2px;vertical-align:middle;background:var(--green);border-radius:0}.route-list{display:flex;gap:0;padding:4px 0 2px;list-style:none;margin:0;overflow:auto}.route-list li{flex:1;min-width:96px;text-align:center;position:relative;padding:0 6px;font-size:12px;color:var(--muted)}.route-list li:before{content:"";height:1px;background:var(--line);position:absolute;top:14px;left:0;right:0}.route-step{width:28px;height:28px;border-radius:100%;background:#f0f0e7;border:1px solid var(--line);display:grid;place-content:center;position:relative;margin:0 auto 8px;font-size:11px}.route-list li.current{font-weight:650;color:var(--green)}.route-list li.current .route-step{background:var(--green);color:white;border-color:var(--green)}.route-list li.done .route-step{background:var(--gold-light);color:#826223;border-color:#d6c699}.route-footer{display:flex;gap:12px;justify-content:space-between;margin-top:17px;padding-top:13px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.status-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:19px}.status-item{background:#f6f6ef;padding:10px 12px;border-radius:8px;min-width:0}.status-item span{display:block;color:var(--muted);font-size:11px;margin-bottom:2px}.status-item strong{font-size:14px;font-weight:600;overflow-wrap:anywhere}.control-row{display:flex;gap:9px;flex-wrap:wrap}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field select{width:100%}.check{display:flex;gap:8px;align-items:center;font-size:13px}.check input{accent-color:var(--green);width:16px;height:16px}.separator{border:0;border-top:1px solid var(--line);margin:18px 0}.session-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.session-actions button{padding:9px 4px;font-size:13px}.narration{font-family:"Microsoft YaHei",sans-serif;font-size:19px;line-height:1.95;white-space:pre-wrap;overflow-wrap:anywhere}.narration.empty{color:var(--muted);font-size:16px}.narration-header{display:flex;align-items:center;gap:12px;margin-bottom:13px}.expression{font-size:25px;width:47px;height:47px;display:grid;place-content:center;border-radius:100%;background:var(--gold-light);border:2px solid var(--gold)}.speech-status{font-size:12px;color:var(--muted);margin-top:15px;padding-top:12px;border-top:1px solid var(--line)}.quiz{margin-top:20px;padding:15px;background:#f6f4ec;border-radius:10px}.quiz-options{display:grid;gap:8px;margin-top:12px}.quiz-options button{text-align:left}.quiz-feedback{font-size:13px;margin-top:10px;color:var(--green)}.question-form{display:flex;gap:9px;margin-top:13px}.question-form input{min-width:0;flex:1}.qa-result{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:13px;font-size:14px}.sources{margin-top:15px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12px}.sources summary{cursor:pointer}.sources-list{padding-left:18px;margin-bottom:0}.sources-list li{margin:5px 0;overflow-wrap:anywhere}.scenario-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:15px}.scenario-grid button{text-align:left;font-size:12px}.scenario-grid button:first-child{grid-column:1 / -1;text-align:center}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:12px;background:#f7f6ef;border-radius:8px;overflow-wrap:anywhere}.stat strong{display:block;font-size:23px;font-weight:550;font-variant-numeric:tabular-nums}.stat span{font-size:11px;color:var(--muted)}.event-list{padding:0;margin:15px 0 0;list-style:none;max-height:245px;overflow:auto}.event-list li{display:flex;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:12px;overflow-wrap:anywhere}.event-list time{color:var(--muted);flex-shrink:0;min-width:56px}.footer{display:flex;justify-content:space-between;gap:20px;font-size:11px;color:var(--muted);padding:20px 0 0}.display-only{display:none}.display-mode .operator-only{display:none!important}.display-mode .display-only{display:initial}.display-mode .layout{max-width:1800px}.display-mode .grid{grid-template-columns:minmax(400px,1fr) minmax(0,1.2fr)}.display-mode .narration{font-size:clamp(25px,2.3vw,43px);line-height:1.85}.display-mode .narration-card{min-height:540px}.display-mode .quiz{font-size:21px}.display-mode .quiz-options button{font-size:18px}.display-mode .intro h2{font-size:34px}.display-mode .brand h1{font-size:26px}.display-mode .card-head h2{font-size:20px}
+    @media(max-width:1050px){.layout{padding:22px}.topbar{padding:0 22px}.grid{grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr)}.status-strip{grid-template-columns:1fr}.status-item{display:flex;align-items:center;justify-content:space-between}.status-item span{margin:0}.intro{align-items:start}.header-right{gap:10px}.display-mode .grid{grid-template-columns:1fr}}
+    @media(max-width:790px){.topbar{height:auto;padding:17px;align-items:start}.brand h1{font-size:19px}.brand{gap:9px}.seal{width:38px;height:38px}.header-right{flex-direction:column;align-items:end;gap:6px}.layout{padding:18px 14px}.intro{display:block}.intro .sim-label{margin-top:12px}.intro h2{font-size:24px}.grid{grid-template-columns:1fr}.card-head,.card-body{padding:16px}.stats{grid-template-columns:repeat(2,1fr)}.footer{display:block}.header-right .tiny{display:none}.display-mode .narration-card{min-height:0}.display-mode .grid{grid-template-columns:1fr}.display-mode .intro h2{font-size:27px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="seal" aria-hidden="true">文</div><div><div class="eyebrow">HERITAGE · TOUR</div><h1>文脉 · 非遗导览</h1></div></div>
+    <div class="header-right"><span id="connection" class="pill bad"><i class="dot"></i><span>正在连接</span></span><a class="operator-only tiny" href="/display" target="_blank" rel="noopener">打开导览大屏 ↗</a><a class="display-only tiny" href="/">返回控制台</a></div>
+  </header>
+  <main class="layout">
+    <div class="intro"><div><div class="eyebrow">A JOURNEY THROUGH LIVING HERITAGE</div><h2 id="page-title">让技艺被看见，让故事被听见</h2><p id="session-message" role="status">等待导览服务状态。字幕始终可用。</p></div><div class="sim-label">离线导览演示 · 游客与故障场景为仿真输入，不是真实识别</div></div>
+    <div id="connection-alert" class="alert" role="alert">尚未连接导览服务，操作暂不可用。</div>
+    <div id="safety-alert" class="alert" role="alert" hidden></div>
+    <div id="command-alert" class="alert operator-only" role="alert" hidden></div>
+    <div class="grid">
+      <div class="column">
+        <section class="card map-card" aria-labelledby="map-heading">
+          <div class="card-head"><h2 id="map-heading">展馆实时导览</h2><span id="nav-status" class="pill">等待导航状态</span></div>
+          <div class="map-container"><canvas id="map" width="1062" height="660" aria-label="展馆地图，显示机器人、游客、五区停靠点及导航路径" role="img"></canvas><span id="map-note" class="map-note">正在加载地图</span></div>
+          <div class="legend"><span><i class="robot"></i>机器人</span><span><i class="visitor"></i>仿真游客</span><span><i></i>展区停靠点</span><span><i class="path"></i>规划路径</span></div>
+          <div class="card-body" style="padding-top:8px"><ol id="route" class="route-list"><li>等待五区路线</li></ol><div class="route-footer"><span id="pose" class="mono">定位：尚无数据</span><span id="visitor-count">游客：尚无数据</span></div></div>
+        </section>
+        <section class="card operator-only" aria-labelledby="control-heading">
+          <div class="card-head"><h2 id="control-heading">导览控制</h2><span class="tiny muted">所有状态以服务端为准</span></div>
+          <div class="card-body">
+            <div class="status-strip"><div class="status-item"><span>业务状态</span><strong id="business-state">等待状态</strong></div><div class="status-item"><span>导航就绪</span><strong id="ready-state">未确认</strong></div><div class="status-item"><span>安全门控</span><strong id="safety-state">未提供</strong></div></div>
+            <div class="field-row"><div class="field"><label for="mode">讲解深度</label><select id="mode"><option value="general">大众 · 简明导览</option><option value="child">儿童 · 趣味探索</option><option value="deep">深度 · 工艺细读</option></select></div><div class="field"><label for="language">讲解语言</label><select id="language"><option value="zh">中文</option><option value="en">English</option></select></div></div>
+            <div class="control-row" style="justify-content:space-between;align-items:center"><label class="check"><input id="auto-advance" type="checkbox" checked>讲解互动完成后自动前往下一站</label><button id="start" class="primary" disabled>开始导览 →</button></div>
+            <hr class="separator">
+            <div class="session-actions"><button data-command="pause" disabled>暂停</button><button data-command="resume" disabled>继续</button><button data-command="repeat" disabled>重复讲解</button><button data-command="skip" disabled>跳过讲解</button><button data-command="next" disabled>下一站 →</button><button data-command="end" class="danger" disabled>结束并返航</button><button data-command="manual" class="danger" disabled>人工接管</button><button data-command="recover" disabled>恢复检查</button></div>
+            <p id="control-hint" class="tiny muted" style="margin-top:12px">服务就绪且游客到访后，可开始导览。</p>
+          </div>
+        </section>
+        <section class="card operator-only" aria-labelledby="event-heading"><div class="card-head"><h2 id="event-heading">本场导览记录</h2><span class="tiny muted">实时状态 · 每秒刷新</span></div><div class="card-body"><div id="stats" class="stats"><p class="muted tiny">暂无统计</p></div><div style="margin-top:18px"><h3>本次运行展区停靠次数</h3><div id="zone-heat" class="stats" style="margin-top:10px"><p class="muted tiny">等待服务提供统计</p></div></div><ul id="events" class="event-list"><li>尚无事件记录</li></ul></div></section>
+      </div>
+      <div class="column">
+        <section class="card narration-card" aria-labelledby="narration-heading">
+          <div class="card-head"><h2 id="narration-heading">此刻 · 为你讲述</h2><span id="tour-state" class="pill">待命</span></div>
+          <div class="card-body"><div class="narration-header"><div id="expression" class="expression" aria-label="机器人表情">◡</div><div><h3 id="zone-name">欢迎来到非遗展馆</h3><p id="presentation-mode" class="tiny muted">离线策展示范内容</p></div></div>
+            <p id="subtitle" class="narration empty" aria-live="polite">导览尚未开始。跟随机器人，一起探索技艺、作品与传承的故事。</p>
+            <p id="task-card" class="tiny muted" style="margin-top:14px">探索任务卡 · 等待开始</p>
+            <div id="quiz" class="quiz" hidden><div class="eyebrow">DISCOVER & ANSWER · 互动任务卡</div><h3 id="quiz-question"></h3><div id="quiz-options" class="quiz-options"></div><p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p></div>
+            <div class="speech-status"><label class="check"><input id="speech-enabled" type="checkbox">启用本机离线朗读</label><p id="speech-status" style="margin-top:5px">朗读未启用，正在使用字幕。不会申请麦克风或上传音频。</p></div>
+            <details class="sources"><summary>知识出处与内容边界</summary><p style="margin-top:9px">展品讲解为示范策展内容，具体馆藏信息以馆方为准。问答仅限已配置知识；未知内容交由工作人员协助。</p><ul id="sources" class="sources-list"><li>等待服务提供知识来源。</li></ul></details>
+          </div>
+        </section>
+        <section class="card operator-only" aria-labelledby="question-heading"><div class="card-head"><h2 id="question-heading">向导览员提问</h2><span class="tiny muted">文字输入</span></div><div class="card-body"><p class="tiny muted">可以询问当前展区的工艺与文化。不确定的问题会转交工作人员。</p><form id="question-form" class="question-form"><label class="sr-only" for="question" hidden>输入问题</label><input id="question" placeholder="例如：这项工艺有哪些制作步骤？" maxlength="500" autocomplete="off" aria-label="输入导览问题" required><button id="ask" type="submit" disabled>提问</button></form><p id="qa-result" class="qa-result" aria-live="polite"></p></div></section>
+        <section class="card operator-only" aria-labelledby="scenario-heading"><div class="card-head"><h2 id="scenario-heading">仿真场景演示</h2><span class="eyebrow">SIMULATION</span></div><div class="card-body"><div class="sim-label">仿真输入，不是真实识别。按钮仅用于演示到访、人流及异常处置。</div><div class="control-row" style="margin-top:14px"><button data-visitors="1" disabled>单人到访</button><button data-visitors="3" disabled>3 人结伴到访</button></div><div class="scenario-grid"><button data-scenario="clear" disabled>恢复正常场景</button><button data-scenario="static_obstacle" disabled>静态障碍 · 通路受阻</button><button data-scenario="crossing" disabled>动态人流 · 横穿通路</button><button data-scenario="visitor_lost" disabled>游客掉队</button><button data-scenario="localization_lost" disabled>定位丢失</button><button data-scenario="battery_low" disabled>低电量</button><button data-scenario="unclear" disabled>游客指令听不清（模拟）</button></div><p class="tiny muted" style="margin-top:12px">恢复正常场景后，如仍处于故障或人工状态，请点击「恢复检查」。恢复是否成功由服务端判定。</p></div></section>
+      </div>
+    </div>
+    <footer class="footer"><span>文脉非遗导览 · 本地运行 / 无外部资源依赖 / 无游客音频采集</span><span id="last-update" class="mono">等待第一帧状态</span></footer>
+  </main>
+  <script>
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const isDisplay = location.pathname.replace(/\/$/, '') === '/display' || new URLSearchParams(location.search).get('display') === '1';
+    if (isDisplay) { document.body.classList.add('display-mode'); $('page-title').textContent = '跟随文脉，走进非遗的故事'; document.title = '文脉 · 导览大屏'; }
+    const stateNames = {IDLE:'待命',WELCOMING:'迎宾',NAVIGATING:'前往展区',PRESENTING:'正在讲解',READY_NEXT:'等待下一站',QUIZ:'互动问答',PAUSED:'已暂停',FAULT:'故障待处理',MANUAL:'人工接管',RETURNING:'正在返航',COMPLETE:'导览完成'};
+    const navigationNames = {initializing:'导航初始化',ready:'导航已就绪',navigating:'正在导航',arrived:'已到达',stopped:'导航已停止'};
+    const modeNames = {child:'儿童讲解',general:'大众讲解',deep:'深度讲解'};
+    const statNames = {visitors:'接待游客',visitor_count:'接待游客',sessions:'导览场次',completed:'完成导览',completed_tours:'完成导览',zones_visited:'已访展区',zones_completed:'已讲解展区',questions:'提问次数',answered_questions:'知识库已解答',unknown_questions:'转人工提问',quiz_correct:'答题正确',quiz_answers:'答题次数',faults:'异常次数',started:'开始次数',tours:'导览场次',quiz_attempts:'答题次数',manual_takeovers:'人工接管',pauses:'暂停次数',repeats:'重复讲解',skipped_zones:'跳过展区'};
+    let snapshot = null, connected = false, busy = false, lastSpeechId = null, spokenIds = new Set(), voiceGeneration = 0, selectedVoice = null;
+    let speechHeartbeat = null, activeSpeechId = null;
+    const mapImage = new Image(); let mapLoaded = false;
+    mapImage.onload = () => { mapLoaded = true; drawMap(); };
+    mapImage.onerror = () => { mapLoaded = false; $('map-note').textContent = '地图图片不可用 · 仅显示坐标示意'; drawMap(); };
+    mapImage.src = '/api/map.png';
+    const safeText = value => value == null ? '' : typeof value === 'string' ? value : typeof value === 'object' ? JSON.stringify(value) : String(value);
+    const finite = value => typeof value === 'number' && Number.isFinite(value);
+    const route = () => Array.isArray(snapshot?.route) ? snapshot.route : Array.isArray(snapshot?.route?.zones) ? snapshot.route.zones : [];
+    function showAlert(id, message) { $(id).textContent = message; $(id).hidden = !message; }
+    function statusName(value) { return stateNames[value] || (value ? '未知状态：' + safeText(value) : '未提供'); }
+    async function command(data) {
+      if (!connected || busy) return false;
+      busy = true; updateControls(); showAlert('command-alert', '');
+      try {
+        const response = await fetch('/api/command', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(6000)});
+        const result = await response.json();
+        if (!response.ok || result.ok !== true) throw new Error(result.error || '指令未被服务确认');
+        await refresh(); return true;
+      } catch (error) { showAlert('command-alert', '操作未确认：' + error.message + '。请核对实时状态后再操作。'); return false; }
+      finally { busy = false; updateControls(); }
+    }
+    async function refresh() {
+      try {
+        const response = await fetch('/api/state', {cache:'no-store',signal:AbortSignal.timeout(3500)});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const next = await response.json();
+        if (!next || typeof next !== 'object' || Array.isArray(next)) throw new Error('状态格式无效');
+        snapshot = next; connected = true;
+        $('connection').className = 'pill good'; $('connection').lastElementChild.textContent = '服务已连接';
+        showAlert('connection-alert', ''); $('last-update').textContent = '最近更新 ' + new Date().toLocaleTimeString('zh-CN', {hour12:false}); render();
+      } catch (error) {
+        connected = false; $('connection').className = 'pill bad'; $('connection').lastElementChild.textContent = '连接中断';
+        showAlert('connection-alert', '无法连接导览服务，已禁用操作。画面可能为上次状态，正在自动重连。');
+        stopSpeech(); updateControls();
+      }
+    }
+    function updateControls() {
+      const state = snapshot?.state, available = connected && !busy, ready = snapshot?.ready === true;
+      const active = ['WELCOMING','NAVIGATING','PRESENTING','READY_NEXT','QUIZ','RETURNING'].includes(state);
+      const safe = !['FAULT','MANUAL'].includes(state);
+      const pendingVisitors = snapshot?.pending_visitors === true;
+      $('start').disabled = !available || !ready || pendingVisitors || !['IDLE','WELCOMING','COMPLETE'].includes(state);
+      document.querySelectorAll('[data-command]').forEach(button => {
+        const type = button.dataset.command;
+        const allowed = {pause:active,resume:state === 'PAUSED' && ready,repeat:['PRESENTING','READY_NEXT','QUIZ'].includes(state),skip:['PRESENTING','QUIZ'].includes(state),next:state === 'READY_NEXT' && ready,end:(active && state !== 'RETURNING') || state === 'PAUSED',manual:!['MANUAL','COMPLETE'].includes(state),recover:['FAULT','MANUAL'].includes(state)};
+        button.disabled = !available || allowed[type] !== true || (!safe && !['manual','recover'].includes(type));
+      });
+      document.querySelectorAll('[data-visitors],[data-scenario]').forEach(button => { button.disabled = !available || (pendingVisitors && button.dataset.visitors !== undefined); });
+      $('ask').disabled = !available || !['PRESENTING','READY_NEXT','QUIZ'].includes(state);
+      document.querySelectorAll('[data-answer]').forEach(button => { button.disabled = !available || state !== 'QUIZ'; });
+      $('control-hint').textContent = !connected ? '连接中断，等待服务恢复。' : pendingVisitors ? '正在布置仿真游客' : !safe ? '当前需要人工处理；恢复检查通过前不会继续导航。' : !ready ? '导航尚未就绪，开始与继续移动操作已禁用。' : state === 'PAUSED' ? '导览已暂停，确认周围环境后可继续。' : '先选择游客到访与讲解偏好，再开始导览。实际到点由导航服务确认。';
+    }
+    function render() {
+      const s = snapshot, zones = route(), zone = zones.find(z => z.id === s.zone_id);
+      $('session-message').textContent = s.pending_visitors === true ? '正在布置仿真游客' : safeText(s.message) || '服务未提供当前导览说明。';
+      $('business-state').textContent = statusName(s.state); $('tour-state').textContent = statusName(s.state);
+      $('tour-state').className = 'pill' + (['FAULT','MANUAL'].includes(s.state) ? ' bad' : '');
+      $('ready-state').textContent = s.ready === true ? '已就绪' : '尚未就绪';
+      const nav = s.navigation;
+      const navStatus = typeof nav === 'string' ? nav : safeText(nav?.status || nav?.state);
+      $('nav-status').textContent = navigationNames[navStatus] || navStatus || '导航状态未提供';
+      const safety = s.safety;
+      $('safety-state').textContent = typeof safety === 'string' ? safety : safeText(safety?.reason || safety?.status || safety?.state) || '未提供';
+      const fault = ['FAULT','MANUAL'].includes(s.state);
+      const gated = safety && typeof safety === 'object' && (safety.stopped === true || safety.blocked === true || safety.allowed === false);
+      showAlert('safety-alert', fault || gated ? (fault ? statusName(s.state) + '：' : '安全停止：') + (safeText(s.message || safety?.reason) || '请工作人员检查现场。') : '');
+      $('zone-name').textContent = zone?.name || (s.state === 'RETURNING' ? '返回待命点' : s.state === 'COMPLETE' ? '本次导览已结束' : '欢迎来到非遗展馆');
+      $('presentation-mode').textContent = (modeNames[s.mode] || '模式未提供') + ' · ' + (s.language === 'en' ? 'English' : s.language === 'zh' ? '中文' : '语言未提供');
+      const speech = s.speech;
+      const subtitle = typeof speech === 'string' ? speech : speech?.text;
+      $('subtitle').textContent = safeText(subtitle) || safeText(s.message) || '等待下一段讲解。';
+      $('subtitle').classList.toggle('empty', !subtitle);
+      const task = s.task_card;
+      $('task-card').textContent = task && typeof task === 'object' ? '探索任务卡 · 已完成 ' + (Array.isArray(task.visited) ? task.visited.length : '—') + ' / ' + safeText(task.total ?? '—') + ' 区 · 答对 ' + safeText(task.score ?? '—') + ' / ' + safeText(task.answered ?? '—') + ' 题' : '探索任务卡 · 服务未提供进度';
+      renderTheme(s.theme); renderRoute(zones); renderQuiz(s.quiz); renderQA(s.qa); renderSources(s.sources, s.qa); renderEvents(s.events); renderStats(s.stats); renderZoneHeat(s.operation?.zone_heat); drawMap(); updateControls(); handleSpeech(speech);
+    }
+    function renderTheme(theme) {
+      const expressions = {welcome:'◡',happy:'◕‿◕',thinking:'◔',speaking:'◡',concerned:'︵',alert:'!',calm:'◡',neutral:'◡'};
+      const expr = theme && typeof theme === 'object' ? theme.expression : null;
+      $('expression').textContent = expressions[expr] || '◡'; $('expression').setAttribute('aria-label', '机器人表情：' + (safeText(expr) || '待命'));
+      const color = theme?.color;
+      $('expression').style.borderColor = typeof color === 'string' && /^#[0-9a-f]{3,8}$/i.test(color) ? color : 'var(--gold)';
+    }
+    function renderRoute(zones) {
+      $('route').replaceChildren();
+      if (!zones.length) { const li = document.createElement('li'); li.textContent = '服务未提供路线'; $('route').append(li); }
+      zones.forEach((zone, index) => {
+        const li = document.createElement('li'), step = document.createElement('span'), text = document.createElement('span');
+        li.className = zone.id === snapshot.zone_id ? 'current' : Array.isArray(snapshot.task_card?.visited) && snapshot.task_card.visited.includes(zone.id) ? 'done' : '';
+        step.className = 'route-step'; step.textContent = String(index + 1).padStart(2, '0'); text.textContent = zone.name || zone.id || '未命名展区'; li.append(step, text); $('route').append(li);
+      });
+      const pose = snapshot.robot_pose;
+      $('pose').textContent = pose && finite(pose.x) && finite(pose.y) ? '定位 x ' + pose.x.toFixed(2) + ' / y ' + pose.y.toFixed(2) + ' m' : '定位：尚无有效数据';
+      $('visitor-count').textContent = Array.isArray(snapshot.visitors) ? '仿真游客 ' + snapshot.visitors.length + ' 人' : '游客：尚无数据';
+    }
+    let lastQuizKey = '';
+    function renderQuiz(quiz) {
+      const visible = quiz && typeof quiz === 'object' && (quiz.question || quiz.text);
+      $('quiz').hidden = !visible;
+      if (!visible) { lastQuizKey = ''; return; }
+      const english = snapshot.language === 'en';
+      $('quiz-question').textContent = safeText(english && quiz.question_en ? quiz.question_en : quiz.question || quiz.text);
+      $('quiz-feedback').textContent = quiz.result && typeof quiz.result === 'object' ? (quiz.result.correct ? '回答正确。' : '回答已记录。正确选项：' + safeText(quiz.result.correct_answer) + '。') + safeText(english && quiz.result.reason_en ? quiz.result.reason_en : quiz.result.reason) : safeText(quiz.feedback || quiz.result || '');
+      const options = Array.isArray(quiz.options) ? quiz.options : quiz.options && typeof quiz.options === 'object' ? Object.entries(quiz.options).map(([key, text]) => ({id:key,text})) : [];
+      const key = JSON.stringify([quiz.question || quiz.text, options, english]);
+      if (key === lastQuizKey) return;
+      lastQuizKey = key; $('quiz-options').replaceChildren();
+      options.forEach((option, index) => {
+        const button = document.createElement('button'), object = option && typeof option === 'object';
+        const answer = object ? option.id ?? option.value ?? option.key ?? option.text : option;
+        button.type = 'button'; button.dataset.answer = String(index); button.textContent = safeText(object ? option.id ?? String.fromCharCode(65 + index) : String.fromCharCode(65 + index)) + ' · ' + safeText(object ? english && option.en ? option.en : option.text ?? option.label ?? option.value : option);
+        button.addEventListener('click', () => command({type:'quiz_answer',answer})); $('quiz-options').append(button);
+      });
+    }
+    function renderQA(qa) {
+      $('qa-result').textContent = !qa ? '' : typeof qa === 'string' ? qa : [qa.asked || qa.question ? '提问：' + safeText(qa.asked || qa.question) : '', safeText(snapshot.language === 'en' && qa.answer_en ? qa.answer_en : qa.answer || qa.text || qa.message), qa.human_help === true || qa.answered === false ? '请工作人员协助解答。' : ''].filter(Boolean).join('\n');
+    }
+    function renderSources(sources, qa) {
+      let entries = Array.isArray(sources) ? sources : sources && typeof sources === 'object' ? Object.entries(sources).map(([id,value]) => typeof value === 'object' ? {id,...value} : {id,title:value}) : [];
+      if (!entries.length && Array.isArray(qa?.sources)) entries = qa.sources;
+      $('sources').replaceChildren();
+      if (!entries.length) entries = ['服务未提供具体知识来源。'];
+      entries.forEach(source => { const li = document.createElement('li'); li.textContent = typeof source === 'string' ? source : [source.id,source.title || source.name || source.text,source.note || source.description,source.url,source.checked_on ? '核对日期 ' + source.checked_on : ''].filter(Boolean).map(safeText).join(' · '); $('sources').append(li); });
+    }
+    function renderStats(stats) {
+      $('stats').replaceChildren();
+      const entries = stats && typeof stats === 'object' ? Object.entries(stats).filter(([,value]) => ['number','string'].includes(typeof value)) : [];
+      if (!entries.length) { const p = document.createElement('p'); p.className = 'muted tiny'; p.textContent = '暂无统计'; $('stats').append(p); }
+      entries.forEach(([key,value]) => { const div = document.createElement('div'), strong = document.createElement('strong'), label = document.createElement('span'); div.className = 'stat'; strong.textContent = safeText(value); label.textContent = statNames[key] || key; div.append(strong,label); $('stats').append(div); });
+    }
+    function renderZoneHeat(heat) {
+      $('zone-heat').replaceChildren();
+      const entries = heat && typeof heat === 'object' && !Array.isArray(heat) ? Object.entries(heat).filter(([,count]) => finite(count)) : [];
+      if (!entries.length) { const p = document.createElement('p'); p.className = 'muted tiny'; p.textContent = '服务未提供展区停靠统计'; $('zone-heat').append(p); return; }
+      entries.sort((a,b) => b[1] - a[1]).forEach(([id,count]) => {
+        const div = document.createElement('div'), strong = document.createElement('strong'), label = document.createElement('span');
+        div.className = 'stat'; strong.textContent = safeText(count); label.textContent = route().find(zone => zone.id === id)?.name || id;
+        div.append(strong,label); $('zone-heat').append(div);
+      });
+    }
+    function renderEvents(events) {
+      $('events').replaceChildren(); const items = Array.isArray(events) ? events.slice(-12).reverse() : [];
+      if (!items.length) { const li = document.createElement('li'); li.textContent = '尚无事件记录'; $('events').append(li); }
+      items.forEach(event => {
+        const li = document.createElement('li'), time = document.createElement('time'), text = document.createElement('span');
+        const timestamp = event && typeof event === 'object' ? event.time || event.timestamp || event.at : null;
+        const date = timestamp ? new Date(typeof timestamp === 'number' && timestamp < 1e12 ? timestamp * 1000 : timestamp) : null;
+        time.textContent = date && !Number.isNaN(date.getTime()) ? date.toLocaleTimeString('zh-CN',{hour12:false}) : '—';
+        text.textContent = typeof event === 'string' ? event : safeText(event.message || event.text || event.type || event);
+        li.append(time,text); $('events').append(li);
+      });
+    }
+    function drawMap() {
+      const canvas = $('map'), ctx = canvas.getContext('2d'); if (!ctx) return;
+      const w = canvas.width, h = canvas.height, mw = finite(snapshot?.map?.width) && snapshot.map.width > 0 ? snapshot.map.width : 35.4, mh = finite(snapshot?.map?.height) && snapshot.map.height > 0 ? snapshot.map.height : 22;
+      const project = (x,y) => [(x / mw + .5) * w, (.5 - y / mh) * h];
+      ctx.clearRect(0,0,w,h); ctx.fillStyle = '#edf0e7'; ctx.fillRect(0,0,w,h);
+      if (mapLoaded) { ctx.drawImage(mapImage,0,0,w,h); $('map-note').textContent = '实时位置叠加 · 中心世界坐标 / 米'; }
+      else { ctx.strokeStyle='#d9dfd3'; ctx.lineWidth=1; for(let x=0;x<=w;x+=w/18){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();} for(let y=0;y<=h;y+=h/11){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();} }
+      const points = Array.isArray(snapshot?.navigation?.path) ? snapshot.navigation.path : [];
+      ctx.strokeStyle='#31745eb0'; ctx.lineWidth=5; ctx.setLineDash([10,7]); ctx.beginPath(); let started=false;
+      points.forEach(point => { const x=Array.isArray(point)?point[0]:point?.x, y=Array.isArray(point)?point[1]:point?.y; if(!finite(x)||!finite(y))return; const p=project(x,y); if(!started){ctx.moveTo(...p);started=true;}else ctx.lineTo(...p); }); ctx.stroke(); ctx.setLineDash([]);
+      route().forEach((zone,index) => {
+        const pose=zone.pose; if(!Array.isArray(pose)||!finite(pose[0])||!finite(pose[1]))return; const [x,y]=project(pose[0],pose[1]), active=zone.id===snapshot?.zone_id;
+        ctx.beginPath();ctx.arc(x,y,active?16:12,0,Math.PI*2);ctx.fillStyle=active?'#31745e':'#b28b42';ctx.fill();ctx.strokeStyle='#fffefa';ctx.lineWidth=3;ctx.stroke();ctx.fillStyle='white';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(index+1,x,y);ctx.font='14px "Microsoft YaHei",sans-serif';const label=zone.name||zone.id;const tw=ctx.measureText(label).width;const labelX=Math.min(w-tw/2-8,Math.max(tw/2+8,x));const labelY=y>h-45?y-28:y+27;ctx.fillStyle='#fffefae8';ctx.fillRect(labelX-tw/2-5,labelY-11,tw+10,22);ctx.fillStyle='#22332e';ctx.fillText(label,labelX,labelY);
+      });
+      (Array.isArray(snapshot?.visitors)?snapshot.visitors:[]).forEach(visitor => { if(!finite(visitor.x)||!finite(visitor.y))return;const [x,y]=project(visitor.x,visitor.y);ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.fillStyle='#618ca8';ctx.fill();ctx.strokeStyle='white';ctx.lineWidth=2;ctx.stroke(); });
+      const pose=snapshot?.robot_pose;
+      if(pose&&finite(pose.x)&&finite(pose.y)){const [x,y]=project(pose.x,pose.y);ctx.save();ctx.translate(x,y);ctx.rotate(- (finite(pose.yaw)?pose.yaw:0));ctx.beginPath();ctx.moveTo(20,0);ctx.lineTo(-12,-12);ctx.lineTo(-7,0);ctx.lineTo(-12,12);ctx.closePath();ctx.fillStyle='#175c44';ctx.strokeStyle='white';ctx.lineWidth=3;ctx.fill();ctx.stroke();ctx.restore();}
+    }
+    function clearSpeechHeartbeat() { if (speechHeartbeat !== null) { clearInterval(speechHeartbeat); speechHeartbeat = null; } }
+    async function speechEvent(type, id) {
+      try {
+        const response = await fetch('/api/command', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,speech_id:id}),signal:AbortSignal.timeout(4000)});
+        const result = await response.json(); return response.ok && result.ok === true;
+      } catch (error) { return false; }
+    }
+    function stopSpeech(aborted = false) {
+      const id = activeSpeechId; voiceGeneration++; clearSpeechHeartbeat(); activeSpeechId = null;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (aborted && id && snapshot?.speech?.id === id) speechEvent('speech_aborted', id);
+    }
+    function availableVoice(language) {
+      const voices = window.speechSynthesis.getVoices(), prefix = language === 'en' ? 'en' : 'zh';
+      return voices.find(voice => voice.localService && voice.lang.toLowerCase().startsWith(prefix)) || null;
+    }
+    function handleSpeech(speech) {
+      if (snapshot && !['WELCOMING','PRESENTING','READY_NEXT','QUIZ','COMPLETE'].includes(snapshot.state)) { stopSpeech(); return; }
+      if (!$('speech-enabled').checked || !connected || !speech || typeof speech !== 'object' || !speech.id || !speech.text) return;
+      if (lastSpeechId !== speech.id && activeSpeechId) stopSpeech();
+      lastSpeechId = speech.id;
+      if (spokenIds.has(speech.id)) return;
+      selectedVoice = availableVoice(speech.language || snapshot.language);
+      if (!selectedVoice) { $('speech-status').textContent = '未找到匹配的本机离线语音，已使用字幕后备。可安装系统语音包后重新启用。'; return; }
+      const id = speech.id, generation = ++voiceGeneration, utterance = new SpeechSynthesisUtterance(speech.text);
+      activeSpeechId = id;
+      utterance.voice = selectedVoice; utterance.lang = selectedVoice.lang; spokenIds.add(id);
+      $('speech-status').textContent = '等待本机离线朗读开始 · ' + selectedVoice.name;
+      utterance.onstart = () => {
+        if (generation !== voiceGeneration || !connected || !$('speech-enabled').checked) return;
+        $('speech-status').textContent = '正在本机离线朗读 · ' + selectedVoice.name;
+        const heartbeat = async () => {
+          if (generation !== voiceGeneration || activeSpeechId !== id) return;
+          const ok = await speechEvent('speech_started', id);
+          if (!ok && generation === voiceGeneration) { stopSpeech(true); $('speech-status').textContent = '朗读状态未获服务确认，已使用字幕后备。'; }
+        };
+        heartbeat(); clearSpeechHeartbeat(); speechHeartbeat = setInterval(heartbeat, 3000);
+      };
+      utterance.onend = () => {
+        if (generation !== voiceGeneration || !connected || !$('speech-enabled').checked) return;
+        voiceGeneration++; clearSpeechHeartbeat(); activeSpeechId = null;
+        $('speech-status').textContent = '本段朗读完成，字幕保留。';
+        if (snapshot?.speech?.id === id && ['WELCOMING','PRESENTING','READY_NEXT','QUIZ','COMPLETE'].includes(snapshot.state)) speechEvent('speech_done', id);
+      };
+      utterance.onerror = () => { if (generation === voiceGeneration) { stopSpeech(true); $('speech-status').textContent = '本机朗读不可用，已使用字幕后备。'; } };
+      window.speechSynthesis.speak(utterance);
+    }
+    $('speech-enabled').addEventListener('change', () => {
+      if (!$('speech-enabled').checked) { stopSpeech(true); $('speech-status').textContent = '朗读已关闭，正在使用字幕。不会申请麦克风或上传音频。'; return; }
+      if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) { $('speech-enabled').checked = false; $('speech-status').textContent = '此浏览器不支持本机朗读，已使用字幕后备。'; return; }
+      $('speech-status').textContent = '本机朗读已启用，正在检查离线语音。'; handleSpeech(snapshot?.speech);
+    });
+    if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', () => { if ($('speech-enabled').checked) handleSpeech(snapshot?.speech); });
+    $('start').addEventListener('click', () => command({type:'start',mode:$('mode').value,language:$('language').value,auto_advance:$('auto-advance').checked}));
+    document.querySelectorAll('[data-command]').forEach(button => button.addEventListener('click', () => command({type:button.dataset.command})));
+    document.querySelectorAll('[data-visitors]').forEach(button => button.addEventListener('click', () => command({type:'visitors',count:Number(button.dataset.visitors)})));
+    document.querySelectorAll('[data-scenario]').forEach(button => button.addEventListener('click', () => command({type:'scenario',name:button.dataset.scenario})));
+    $('question-form').addEventListener('submit', async event => { event.preventDefault(); const text=$('question').value.trim(); if(text && await command({type:'question',text})) $('question').value=''; });
+    async function poll() { await refresh(); setTimeout(poll,1000); }
+    poll();
+    window.addEventListener('beforeunload', () => stopSpeech());
+  </script>
+</body>
+</html>

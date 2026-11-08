@@ -1,0 +1,706 @@
+{
+  "low_battery_blocks_restart": {
+    "drift": 0.0
+  },
+  "group_speed": 0.18,
+  "pause_stop_drift": 0.0,
+  "crossing": {
+    "origin": {
+      "x": -13.078286168360261,
+      "y": -7.56654350887848,
+      "yaw": 1.7966189939324655
+    },
+    "samples": [
+      {
+        "front_distance": 1.6760425567626953,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.6714439392089844,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.662671446800232,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.6492427587509155,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.613724946975708,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.637589931488037,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.9034603834152222,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.8068667650222778,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.7853058576583862,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.763765811920166,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.657406210899353,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.6360279321670532,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.543358564376831,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.5216712951660156,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.4454907178878784,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.4238423109054565,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.4022810459136963,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.2997047901153564,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.235421061515808,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.1919573545455933,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.134110927581787,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.1122260093688965,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.0347779989242554,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.0120340585708618,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 0.988823413848877,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.9465433955192566,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.911743700504303,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.8956865668296814,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.9098870754241943,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 5.2249674797058105,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.210733413696289,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.175731658935547,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.686651229858398,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.610039710998535,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.577378273010254,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.591924667358398,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.6321611404418945,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.003803730010986,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.003803730010986,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.971770286560059,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.948904991149902,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.928196907043457,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 4.90397310256958,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.169040203094482,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.263212203979492,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.310884475708008,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.396402359008789,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.441141128540039,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.4872612953186035,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.534800052642822,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.603275299072266,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.654479026794434,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.707276821136475,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.732718467712402,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.727236747741699,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.721755027770996,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.716274738311768,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.7107930183410645,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.705315113067627,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.69985294342041,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.7439775466918945,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.740174770355225,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.750570774078369,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.74634313583374,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.7371602058410645,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.7371602058410645,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 5.7569403648376465,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      }
+    ]
+  },
+  "static_obstacle": {
+    "origin": {
+      "x": -12.837374684268568,
+      "y": -5.838413190746346,
+      "yaw": 1.4632101731995448
+    },
+    "samples": [
+      {
+        "front_distance": 5.870519161224365,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.3308295011520386,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.3084481954574585,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.2860369682312012,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.2634906768798828,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.2409690618515015,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.1960480213165283,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.1960480213165283,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.1508102416992188,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.1279089450836182,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.104918122291565,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.0592067241668701,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.037136435508728,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.0177816152572632,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 1.0022755861282349,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 0.9908222556114197,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.9832361340522766,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.9770100712776184,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.9762528538703918,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 0.9752682447433472,
+        "speed": 0.12,
+        "reason": "前方有人/障碍，减速"
+      },
+      {
+        "front_distance": 3.34383487701416,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.2767233848571777,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.2424843311309814,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.209585428237915,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.178358793258667,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.151589870452881,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.1017916202545166,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.078479051589966,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.056391716003418,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.03606915473938,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9981696605682373,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.979874849319458,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9600367546081543,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9409427642822266,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9230823516845703,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.904655694961548,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8893513679504395,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8676986694335938,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8551111221313477,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8407955169677734,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8238744735717773,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.801142692565918,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.801142692565918,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.781442403793335,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.771735191345215,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.7642502784729004,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.7574551105499268,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.7563107013702393,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.7734580039978027,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.788069486618042,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.803473472595215,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.814387798309326,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.832318067550659,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 3.0350241661071777,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9980361461639404,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9813232421875,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.960554599761963,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9376349449157715,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.9167137145996094,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.897857666015625,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8721182346343994,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.8652706146240234,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      },
+      {
+        "front_distance": 2.844127893447876,
+        "speed": 0.18,
+        "reason": "多人慢行"
+      }
+    ],
+    "minimum_robot_center_to_box": 0.4531028031319233
+  },
+  "visitor_lost": {
+    "drift": 0.007359016389712206,
+    "fault": {
+      "kind": "visitor_lost",
+      "simulated": true
+    }
+  },
+  "localization_lost": {
+    "drift": 0.0,
+    "fault": {
+      "kind": "localization_lost",
+      "simulated": true
+    }
+  },
+  "unclear": {
+    "drift": 0.0,
+    "fault": {
+      "kind": "unclear",
+      "simulated": true
+    }
+  },
+  "lost_narration_client_pauses": true,
+  "bounded_qa_sources": [
+    "unesco_definition"
+  ],
+  "unknown_question_handoff": true,
+  "repeat_after_quiz_recovers": true,
+  "manual_stop_drift": 0.0,
+  "paused_simulator_http_responsive": true,
+  "passed": true
+}

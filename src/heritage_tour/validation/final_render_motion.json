@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "elapsed_seconds": 22.372570169000028,
+  "forward_distance_m": 0.313248453004451,
+  "pause_drift_m": 0.00441151522572496,
+  "home_distance_m": 0.14786956030997325,
+  "scene_linkage": {
+    "ready": true,
+    "ok": true,
+    "motion_ok": true,
+    "transport_alive": true,
+    "error": ""
+  }
+}

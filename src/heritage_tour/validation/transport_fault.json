@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "fault": {
+    "kind": "scene_update_failed",
+    "simulated": false
+  },
+  "ready": false,
+  "transport_alive": false,
+  "recover_rejected": true,
+  "stop_drift_m": 0.007831520316290592
+}
