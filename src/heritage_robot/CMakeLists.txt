@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.8)
+project(heritage_robot)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY models launch config DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/drive_robot.py DESTINATION lib/${PROJECT_NAME})
+ament_package()
