@@ -28,6 +28,7 @@ from tf2_ros import Buffer, TransformListener
 from heritage_tour.guide_logic import GuideSession
 from heritage_tour.scene import SceneBridge
 from heritage_tour.voice_pack import cantonese_audio_url
+from heritage_tour.runtime_paths import event_log_path
 
 
 PUBLIC={'visitors','start','pause','resume','repeat','skip','next','end','question','quiz_answer',
@@ -67,7 +68,7 @@ class TourRuntime(Node):
         self.create_subscription(LaserScan,'/scan',self._scan,qos_profile_sensor_data)
         self.create_subscription(PoseWithCovarianceStamped,'/amcl_pose',self._amcl,10)
         self.create_subscription(NavPath,'/plan',self._path,10)
-        self.log_path=Path.home()/'moveit_ws/log/heritage_tour/events.jsonl'
+        self.log_path=event_log_path()
         self.log_path.parent.mkdir(parents=True,exist_ok=True)
         self.wall_clock=Clock(clock_type=ClockType.STEADY_TIME)
         self.create_timer(.1,self.tick,clock=self.wall_clock)

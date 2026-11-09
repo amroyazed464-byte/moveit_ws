@@ -15,7 +15,7 @@
 先关闭此前单独打开的展厅，再在虚拟机终端运行：
 
 ```bash
-cd /home/jay/moveit_ws
+cd ~/moveit_ws  # 或实际解压后的工作空间目录
 source /opt/ros/jazzy/setup.bash
 colcon build --packages-select heritage_hall heritage_robot
 source install/setup.bash

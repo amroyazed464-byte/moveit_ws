@@ -51,7 +51,7 @@ ros2 run heritage_tour start_tour.sh
 
 ## 内容更新与核验
 
-讲解、问答、答题、停靠位置和来源集中在 `config/content.json`，修改后重新构建并重启。内容仅作示范，馆方上线前仍应审核。网页只读取本机资源，运行时不访问资料网站。事件记录保存在工作区 `log/heritage_tour/events.jsonl`，被 Git 忽略；页面统计为本次进程累计，重启后清零，日志保留。
+讲解、问答、答题、停靠位置和来源集中在 `config/content.json`，修改后重新构建并重启。内容仅作示范，馆方上线前仍应审核。网页只读取本机资源，运行时不访问资料网站。对外部署启动器将事件记录写入解压目录的 `log/heritage_tour/events.jsonl`；直接使用 ROS 启动时默认写入 `~/.local/state/heritage_tour/events.jsonl`，也可用 `HERITAGE_TOUR_LOG_DIR` 指定目录。页面统计为本次进程累计，重启后清零，日志保留。
 
 ```bash
 python3 -m pytest -q
