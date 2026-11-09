@@ -66,6 +66,36 @@ class GuideSessionTest(unittest.TestCase):
         self.finish_speech()
         self.assertEqual(self.session.snapshot()['state'], 'IDLE')
 
+    def test_cantonese_can_be_selected_before_welcome_and_covers_narration_qa(self):
+        self.send('language', language='yue')
+        self.send('visitor', count=3)
+        self.assertEqual(self.session.speech['language'], 'yue')
+        self.assertIn('3人', self.session.speech['text'])
+        self.start(language='yue')
+        self.send('arrived', zone_id='overview')
+        self.assertEqual(self.session.speech['text'], '大众讲解')
+        self.send('question', text='什么是非遗')
+        self.assertEqual(self.session.speech['language'], 'yue')
+        self.assertEqual(self.session.speech['text'], '代代传承的技艺和实践。')
+
+    def test_language_change_cannot_interrupt_navigation_or_fault_handling(self):
+        self.start()
+        before = self.session.snapshot()
+        with self.assertRaises(ValueError):
+            self.send('language', language='yue')
+        self.assertEqual(self.session.snapshot(), before)
+        self.send('fault', kind='battery_low')
+        with self.assertRaises(ValueError):
+            self.send('language', language='yue')
+
+    def test_changing_welcome_language_emits_new_speech_effect(self):
+        self.send('visitor', count=1)
+        old_id = self.session.speech['id']
+        effects = self.send('language', language='yue')
+        speech = next(e for e in effects if e['type'] == 'speak')
+        self.assertEqual(speech['language'], 'yue')
+        self.assertNotEqual(speech['id'], old_id)
+
     def test_complete_five_zone_route_quiz_and_return(self):
         self.start(mode='deep', language='en', auto_advance=True)
         for zone_id in ('overview', 'craft', 'masterpieces', 'history', 'interactive'):

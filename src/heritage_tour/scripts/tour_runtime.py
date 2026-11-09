@@ -6,6 +6,7 @@ import json
 import math
 from pathlib import Path
 import queue
+import re
 import signal
 import threading
 import time
@@ -26,10 +27,11 @@ from lifecycle_msgs.srv import GetState
 from tf2_ros import Buffer, TransformListener
 from heritage_tour.guide_logic import GuideSession
 from heritage_tour.scene import SceneBridge
+from heritage_tour.voice_pack import cantonese_audio_url
 
 
 PUBLIC={'visitors','start','pause','resume','repeat','skip','next','end','question','quiz_answer',
-        'recover','manual','speech_done','speech_started','speech_aborted','scenario'}
+        'recover','manual','speech_done','speech_started','speech_aborted','scenario','language'}
 SCENARIOS={'clear','static_obstacle','crossing','visitor_lost','localization_lost','battery_low','unclear'}
 
 
@@ -154,7 +156,7 @@ class TourRuntime(Node):
             elif kind=='speak':
                 self.speech_id=effect['id']
                 self.speech_client_until=None;self.speech_client_id=None
-                units=len(effect['text']) if effect['language']=='zh' else len(effect['text'].split())*3
+                units=len(effect['text']) if effect['language']!='en' else len(effect['text'].split())*3
                 self.speech_deadline=time.monotonic()+max(5.,min(180.,units/4.0))
             elif kind=='theme':
                 state=self.session.state
@@ -177,7 +179,7 @@ class TourRuntime(Node):
                     self.speech_deadline=None
                 else:
                     self.speech_client_until=None;self.speech_client_id=None
-                    units=len(speech['text']) if speech['language']=='zh' else len(speech['text'].split())*3
+                    units=len(speech['text']) if speech['language']!='en' else len(speech['text'].split())*3
                     self.speech_deadline=time.monotonic()+max(5.,min(180.,units/4.0))
             return
         if kind=='speech_done' and self.session.speech and event.get('speech_id')==self.session.speech['id']:
@@ -281,6 +283,8 @@ class TourRuntime(Node):
         if now-self.last_animation>.5:
             self.scene.animate(now,following=moving);self.last_animation=now
         view=self.session.snapshot()
+        if view['speech']:
+            view['speech']['audio_url']=cantonese_audio_url(self.share,view['speech'])
         truth=self.scene.robot
         error=math.hypot(self.pose['x']-truth['x'],self.pose['y']-truth['y']) if self.pose and truth else None
         view.update(ready=self.ready,robot_pose=deepcopy(self.pose or truth),world_pose=deepcopy(truth),
@@ -307,6 +311,10 @@ class TourRuntime(Node):
                     with owner.lock:body=json.dumps(owner.view,ensure_ascii=False,allow_nan=False).encode()
                     self.send(200,body)
                 elif path=='/api/map.png':self.send(200,(owner.share/'maps/map.png').read_bytes(),'image/png')
+                elif re.fullmatch(r'/audio/yue/(?:[a-f0-9]{64}|preview)\.mp3',path):
+                    clip=owner.share/'voices/yue'/path.rsplit('/',1)[1]
+                    if clip.is_file():self.send(200,clip.read_bytes(),'audio/mpeg')
+                    else:self.send(404,b'{"ok":false}')
                 elif path in ('/','/display','/index.html'):self.send(200,(owner.share/'web/index.html').read_bytes(),'text/html; charset=utf-8')
                 else:self.send(404,b'{"ok":false}')
             def do_POST(self):

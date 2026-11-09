@@ -35,7 +35,7 @@
           <div class="card-head"><h2 id="control-heading">导览控制</h2><span class="tiny muted">所有状态以服务端为准</span></div>
           <div class="card-body">
             <div class="status-strip"><div class="status-item"><span>业务状态</span><strong id="business-state">等待状态</strong></div><div class="status-item"><span>导航就绪</span><strong id="ready-state">未确认</strong></div><div class="status-item"><span>安全门控</span><strong id="safety-state">未提供</strong></div></div>
-            <div class="field-row"><div class="field"><label for="mode">讲解深度</label><select id="mode"><option value="general">大众 · 简明导览</option><option value="child">儿童 · 趣味探索</option><option value="deep">深度 · 工艺细读</option></select></div><div class="field"><label for="language">讲解语言</label><select id="language"><option value="zh">中文</option><option value="en">English</option></select></div></div>
+            <div class="field-row"><div class="field"><label for="mode">讲解深度</label><select id="mode"><option value="general">大众 · 简明导览</option><option value="child">儿童 · 趣味探索</option><option value="deep">深度 · 工艺细读</option></select></div><div class="field"><label for="language">讲解语言</label><select id="language"><option value="zh">普通话</option><option value="yue">粤语（香港）</option><option value="en">English</option></select></div></div>
             <div class="control-row" style="justify-content:space-between;align-items:center"><label class="check"><input id="auto-advance" type="checkbox" checked>讲解互动完成后自动前往下一站</label><button id="start" class="primary" disabled>开始导览 →</button></div>
             <hr class="separator">
             <div class="session-actions"><button data-command="pause" disabled>暂停</button><button data-command="resume" disabled>继续</button><button data-command="repeat" disabled>重复讲解</button><button data-command="skip" disabled>跳过讲解</button><button data-command="next" disabled>下一站 →</button><button data-command="end" class="danger" disabled>结束并返航</button><button data-command="manual" class="danger" disabled>人工接管</button><button data-command="recover" disabled>恢复检查</button></div>
@@ -51,7 +51,7 @@
             <p id="subtitle" class="narration empty" aria-live="polite">导览尚未开始。跟随机器人，一起探索技艺、作品与传承的故事。</p>
             <p id="task-card" class="tiny muted" style="margin-top:14px">探索任务卡 · 等待开始</p>
             <div id="quiz" class="quiz" hidden><div class="eyebrow">DISCOVER & ANSWER · 互动任务卡</div><h3 id="quiz-question"></h3><div id="quiz-options" class="quiz-options"></div><p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p></div>
-            <div class="speech-status"><label class="check"><input id="speech-enabled" type="checkbox">启用本机离线朗读</label><p id="speech-status" style="margin-top:5px">朗读未启用，正在使用字幕。不会申请麦克风或上传音频。</p></div>
+            <div class="speech-status"><div class="control-row"><label class="check"><input id="speech-enabled" type="checkbox">启用离线语音</label><button id="cantonese-preview" class="small" type="button">试听粤语</button></div><p id="speech-status" style="margin-top:5px">朗读未启用，正在使用字幕。粤语使用随项目安装的音频包。</p></div>
             <details class="sources"><summary>知识出处与内容边界</summary><p style="margin-top:9px">展品讲解为示范策展内容，具体馆藏信息以馆方为准。问答仅限已配置知识；未知内容交由工作人员协助。</p><ul id="sources" class="sources-list"><li>等待服务提供知识来源。</li></ul></details>
           </div>
         </section>
@@ -71,7 +71,7 @@
     const modeNames = {child:'儿童讲解',general:'大众讲解',deep:'深度讲解'};
     const statNames = {visitors:'接待游客',visitor_count:'接待游客',sessions:'导览场次',completed:'完成导览',completed_tours:'完成导览',zones_visited:'已访展区',zones_completed:'已讲解展区',questions:'提问次数',answered_questions:'知识库已解答',unknown_questions:'转人工提问',quiz_correct:'答题正确',quiz_answers:'答题次数',faults:'异常次数',started:'开始次数',tours:'导览场次',quiz_attempts:'答题次数',manual_takeovers:'人工接管',pauses:'暂停次数',repeats:'重复讲解',skipped_zones:'跳过展区'};
     let snapshot = null, connected = false, busy = false, lastSpeechId = null, spokenIds = new Set(), voiceGeneration = 0, selectedVoice = null;
-    let speechHeartbeat = null, activeSpeechId = null;
+    let speechHeartbeat = null, activeSpeechId = null, audioPlayer = null, previewPlayer = null;
     const mapImage = new Image(); let mapLoaded = false;
     mapImage.onload = () => { mapLoaded = true; drawMap(); };
     mapImage.onerror = () => { mapLoaded = false; $('map-note').textContent = '地图图片不可用 · 仅显示坐标示意'; drawMap(); };
@@ -113,6 +113,8 @@
       const safe = !['FAULT','MANUAL'].includes(state);
       const pendingVisitors = snapshot?.pending_visitors === true;
       $('start').disabled = !available || !ready || pendingVisitors || !['IDLE','WELCOMING','COMPLETE'].includes(state);
+      $('language').disabled = !available || !['IDLE','WELCOMING','COMPLETE'].includes(state);
+      $('cantonese-preview').disabled = !available || activeSpeechId !== null;
       document.querySelectorAll('[data-command]').forEach(button => {
         const type = button.dataset.command;
         const allowed = {pause:active,resume:state === 'PAUSED' && ready,repeat:['PRESENTING','READY_NEXT','QUIZ'].includes(state),skip:['PRESENTING','QUIZ'].includes(state),next:state === 'READY_NEXT' && ready,end:(active && state !== 'RETURNING') || state === 'PAUSED',manual:!['MANUAL','COMPLETE'].includes(state),recover:['FAULT','MANUAL'].includes(state)};
@@ -138,7 +140,9 @@
       const gated = safety && typeof safety === 'object' && (safety.stopped === true || safety.blocked === true || safety.allowed === false);
       showAlert('safety-alert', fault || gated ? (fault ? statusName(s.state) + '：' : '安全停止：') + (safeText(s.message || safety?.reason) || '请工作人员检查现场。') : '');
       $('zone-name').textContent = zone?.name || (s.state === 'RETURNING' ? '返回待命点' : s.state === 'COMPLETE' ? '本次导览已结束' : '欢迎来到非遗展馆');
-      $('presentation-mode').textContent = (modeNames[s.mode] || '模式未提供') + ' · ' + (s.language === 'en' ? 'English' : s.language === 'zh' ? '中文' : '语言未提供');
+      const languageName = {zh:'普通话',yue:'粤语（香港）',en:'English'}[s.language];
+      $('presentation-mode').textContent = (modeNames[s.mode] || '模式未提供') + ' · ' + (languageName || '语言未提供');
+      if (!busy && languageName) $('language').value = s.language;
       const speech = s.speech;
       const subtitle = typeof speech === 'string' ? speech : speech?.text;
       $('subtitle').textContent = safeText(subtitle) || safeText(s.message) || '等待下一段讲解。';
@@ -249,29 +253,41 @@
       } catch (error) { return false; }
     }
     function stopSpeech(aborted = false) {
-      const id = activeSpeechId; voiceGeneration++; clearSpeechHeartbeat(); activeSpeechId = null;
+      const id = activeSpeechId, wasPlaying = !!id || !!previewPlayer; voiceGeneration++; clearSpeechHeartbeat(); activeSpeechId = null;
+      if (audioPlayer) { audioPlayer.pause(); audioPlayer.src = ''; audioPlayer = null; }
+      if (previewPlayer) { previewPlayer.pause(); previewPlayer = null; }
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (wasPlaying) $('speech-status').textContent = '朗读已停止，字幕保留。';
       if (aborted && id && snapshot?.speech?.id === id) speechEvent('speech_aborted', id);
     }
     function availableVoice(language) {
+      if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices(), prefix = language === 'en' ? 'en' : 'zh';
+      if (language === 'yue') return voices.find(voice => voice.localService && /^(yue|zh-hk)(-|$)/i.test(voice.lang)) || null;
       return voices.find(voice => voice.localService && voice.lang.toLowerCase().startsWith(prefix)) || null;
     }
     function handleSpeech(speech) {
-      if (snapshot && !['WELCOMING','PRESENTING','READY_NEXT','QUIZ','COMPLETE'].includes(snapshot.state)) { stopSpeech(); return; }
+      const speakingStates = ['WELCOMING','PRESENTING','READY_NEXT','QUIZ','COMPLETE','FAULT','MANUAL'];
+      if ((snapshot && !speakingStates.includes(snapshot.state)) || !speech) { if (activeSpeechId) stopSpeech(); return; }
       if (!$('speech-enabled').checked || !connected || !speech || typeof speech !== 'object' || !speech.id || !speech.text) return;
       if (lastSpeechId !== speech.id && activeSpeechId) stopSpeech();
       lastSpeechId = speech.id;
       if (spokenIds.has(speech.id)) return;
-      selectedVoice = availableVoice(speech.language || snapshot.language);
-      if (!selectedVoice) { $('speech-status').textContent = '未找到匹配的本机离线语音，已使用字幕后备。可安装系统语音包后重新启用。'; return; }
-      const id = speech.id, generation = ++voiceGeneration, utterance = new SpeechSynthesisUtterance(speech.text);
+      const clip = typeof speech.audio_url === 'string' && /^\/audio\/yue\/[a-f0-9]{64}\.mp3$/.test(speech.audio_url) ? speech.audio_url : null;
+      selectedVoice = clip ? null : availableVoice(speech.language || snapshot.language);
+      if (!clip && !selectedVoice) { $('speech-status').textContent = '未找到匹配的本机离线语音，已使用字幕后备。可安装系统语音包后重新启用。'; return; }
+      if (previewPlayer) { previewPlayer.pause(); previewPlayer = null; }
+      const id = speech.id, generation = ++voiceGeneration;
+      const utterance = clip ? new Audio(clip) : new SpeechSynthesisUtterance(speech.text);
       activeSpeechId = id;
-      utterance.voice = selectedVoice; utterance.lang = selectedVoice.lang; spokenIds.add(id);
-      $('speech-status').textContent = '等待本机离线朗读开始 · ' + selectedVoice.name;
-      utterance.onstart = () => {
+      if (clip) audioPlayer = utterance;
+      else { utterance.voice = selectedVoice; utterance.lang = selectedVoice.lang; }
+      spokenIds.add(id);
+      const voiceLabel = clip ? '香港粤语 · 本地音频包' : selectedVoice.name;
+      $('speech-status').textContent = '等待离线朗读开始 · ' + voiceLabel;
+      const onStart = () => {
         if (generation !== voiceGeneration || !connected || !$('speech-enabled').checked) return;
-        $('speech-status').textContent = '正在本机离线朗读 · ' + selectedVoice.name;
+        $('speech-status').textContent = '正在离线朗读 · ' + voiceLabel;
         const heartbeat = async () => {
           if (generation !== voiceGeneration || activeSpeechId !== id) return;
           const ok = await speechEvent('speech_started', id);
@@ -279,21 +295,31 @@
         };
         heartbeat(); clearSpeechHeartbeat(); speechHeartbeat = setInterval(heartbeat, 3000);
       };
-      utterance.onend = () => {
+      const onEnd = () => {
         if (generation !== voiceGeneration || !connected || !$('speech-enabled').checked) return;
-        voiceGeneration++; clearSpeechHeartbeat(); activeSpeechId = null;
+        voiceGeneration++; clearSpeechHeartbeat(); activeSpeechId = null; audioPlayer = null;
         $('speech-status').textContent = '本段朗读完成，字幕保留。';
-        if (snapshot?.speech?.id === id && ['WELCOMING','PRESENTING','READY_NEXT','QUIZ','COMPLETE'].includes(snapshot.state)) speechEvent('speech_done', id);
+        if (snapshot?.speech?.id === id && speakingStates.includes(snapshot.state)) speechEvent('speech_done', id);
       };
-      utterance.onerror = () => { if (generation === voiceGeneration) { stopSpeech(true); $('speech-status').textContent = '本机朗读不可用，已使用字幕后备。'; } };
-      window.speechSynthesis.speak(utterance);
+      const onError = () => { if (generation === voiceGeneration) { stopSpeech(true); $('speech-status').textContent = '语音未能播放，已使用字幕后备。请检查浏览器声音设置或重新启用语音。'; } };
+      utterance.onerror = onError;
+      if (clip) { utterance.onplaying = onStart; utterance.onended = onEnd; utterance.play().catch(onError); }
+      else { utterance.onstart = onStart; utterance.onend = onEnd; window.speechSynthesis.speak(utterance); }
     }
     $('speech-enabled').addEventListener('change', () => {
       if (!$('speech-enabled').checked) { stopSpeech(true); $('speech-status').textContent = '朗读已关闭，正在使用字幕。不会申请麦克风或上传音频。'; return; }
-      if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) { $('speech-enabled').checked = false; $('speech-status').textContent = '此浏览器不支持本机朗读，已使用字幕后备。'; return; }
-      $('speech-status').textContent = '本机朗读已启用，正在检查离线语音。'; handleSpeech(snapshot?.speech);
+      if (snapshot?.speech?.id) spokenIds.delete(snapshot.speech.id);
+      $('speech-status').textContent = '离线语音已启用，粤语使用本地音频包。'; handleSpeech(snapshot?.speech);
+    });
+    $('cantonese-preview').addEventListener('click', () => {
+      if (activeSpeechId) return;
+      stopSpeech(); previewPlayer = new Audio('/audio/yue/preview.mp3');
+      $('speech-status').textContent = '正在试听香港粤语 · 本地音频包';
+      previewPlayer.onended = () => { previewPlayer = null; $('speech-status').textContent = '粤语试听完成。选择粤语并启用离线语音即可用于导览。'; };
+      previewPlayer.play().catch(() => { $('speech-status').textContent = '粤语试听未能播放，请检查音频包和浏览器声音设置。'; });
     });
     if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', () => { if ($('speech-enabled').checked) handleSpeech(snapshot?.speech); });
+    $('language').addEventListener('change', () => command({type:'language',language:$('language').value}));
     $('start').addEventListener('click', () => command({type:'start',mode:$('mode').value,language:$('language').value,auto_advance:$('auto-advance').checked}));
     document.querySelectorAll('[data-command]').forEach(button => button.addEventListener('click', () => command({type:button.dataset.command})));
     document.querySelectorAll('[data-visitors]').forEach(button => button.addEventListener('click', () => command({type:'visitors',count:Number(button.dataset.visitors)})));

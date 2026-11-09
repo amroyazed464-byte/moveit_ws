@@ -1,0 +1,191 @@
+{
+  "language": "yue",
+  "locale": "zh-HK",
+  "voice": "zh-HK-HiuGaaiNeural",
+  "rate": "-5%",
+  "text_policy": "Original Chinese scripts read aloud in Cantonese; not a colloquial rewrite.",
+  "generation": "Microsoft Edge online TTS via edge-tts 7.3.1; playback is offline.",
+  "voice_reference": "https://learn.microsoft.com/azure/cognitive-services/speech-service/language-support?tabs=tts",
+  "entries": {
+    "327a4f79203cfdca7ac8d9430ee40dee19b07c7a7eac6606b934228075024c8a.mp3": {
+      "text": "【基础】五个仿真展区是导览路线，并非非遗分类。【背景】我国国家级名录采用十大门类，和公约的五领域框架不同。【工艺】观展时可追问材料、动作与传授方式。【文化】列入名录帮助明确保护对象，不能替代持续学习和实践。",
+      "duration_seconds": 31.42,
+      "sha256": "dc8ef169865d41b2acda94f6ad8c5ad73f082140e0405c406580fe692614b5d9"
+    },
+    "55a2e50a2401855b37ec77da86c1ad55dc7d9104e3c50cfc2daf4896c2e58ecf.mp3": {
+      "text": "【基础】传承不是只给成品标上一个年代。【背景】官方项目介绍把泾县的环境、材料和口传经验相联系。【工艺】制作需要很多工序，学习依赖长期实践。【文化】示意时间线中的名录节点说明保护行动；持续有人学习、实践和传授，才让知识进入未来。",
+      "duration_seconds": 34.92,
+      "sha256": "f2815b65ea8d6e3dcd4517494cbbe208edb2026d048751220d0625a5d7571e86"
+    },
+    "903f0d3959a6f34b161b446b6a29d057b5251f6cf6323a2700dc85da3285c5c9.mp3": {
+      "text": "【基础】保护手工艺，需要关注技艺和知识。【背景】成品能展示结果，却不能独自保存匠人的经验。【工艺】把校样纠错与协作也纳入观察，比较每步对成品的影响。【文化】传承培训把实践与交流结合；我们的按钮体验只提供学习线索，不能替代跟随师傅训练。",
+      "duration_seconds": 34.99,
+      "sha256": "8ff5f270275a5cfc89049945a0d50a6c7663fe0d6cb25f041bfd76517d0f6d73"
+    },
+    "ea86ee8fb3b905a09c6342ee1e1aebb63707bc5797ce7dfd7d97c94c00c44855.mp3": {
+      "text": "【基础】剪纸用剪刀或刻刀在纸上形成纹样。【背景】国家图书馆的项目介绍强调它与民俗生活的联系。【工艺】观察轮廓、疏密与留白，是本示范区的赏析任务。【文化】作品不只是装饰，也能表达生活愿望与审美情趣。",
+      "duration_seconds": 29.57,
+      "sha256": "539808d128285dd879e19410687ff52431fee3bcf977fefbe8b5954226c8c6e8"
+    },
+    "974f00fe9da31817d9e1087314521bcddd3d510ac215fec5bfcae24d620e4972.mp3": {
+      "text": "【基础】剪纸能把纸变成好看的图案。【背景】它也走进人们的日常和民俗活动。【工艺】找一找画面里留下的纸和剪开的空处。【文化】本区是示意赏析，没有真实大师作品；你愿意用什么图案表达祝福？",
+      "duration_seconds": 28.2,
+      "sha256": "26edfd2d7e26f42be144d9e167478636f42099ebfe13564d24f176b7971a0253"
+    },
+    "4ef10e76834a82c543677b7a605030c0bc925a1aec7fa979befb9f49def750fd.mp3": {
+      "text": "【基础】参与式学习应能回到真实实践。【背景】传承人群培训强调秉承传统并交流学习，学校也能与传承人协作。【工艺】任务卡记录你识别的步骤和答题结果，不评价真实技艺水平。【文化】本系统只统计会话内事件，不做人脸识别或真实语音采集；需要深入学习时，请由人工引介。",
+      "duration_seconds": 37.9,
+      "sha256": "99f1766d712f5c8c678a6ef6783f337f143d12655c73a2fd4bcd12ea9850ee60"
+    },
+    "1a6867425ddd92e51739b369cbd53629b41badbc4814966b4a8dc7d0f01fd9f1.mp3": {
+      "text": "【基础】宣纸常用于书法、绘画与印书。【背景】宣纸传统制作技艺于2009年列入联合国教科文组织代表作名录。【工艺】青檀皮与稻草经过浸泡、制浆等手工环节。【文化】本区讲传承过程，不宣称展示了某年某人制作的真品。",
+      "duration_seconds": 31.06,
+      "sha256": "771c61e576f317a9365c57cbca79c8cd447f71b39eb96cbe150ab48270973940"
+    },
+    "ab5303d5b821d3509d347ec9ed9b98526fc44ff804ecb46aa62dacbbea0916a3.mp3": {
+      "text": "【基础】现在把看见的变成一个小任务。【背景】学习手艺可以从兴趣开始。【工艺】请先说步骤、再做屏幕答题；真实工具要听工作人员安排。【文化】完成任务卡后，告诉同伴你最想继续学什么。答题记录只是本次体验。",
+      "duration_seconds": 30.38,
+      "sha256": "ce9fbb3893bb24b96959a86fd3d93536accbe2e6ad067816f22569f1942131a4"
+    },
+    "4754569e3db3967db7f7c99774fe0e5221520ba7d71635530cda5d2e66d8c32f.mp3": {
+      "text": "【基础】赏析要把图案放回使用情境。【背景】中国民间文艺家协会的记录工作关注创作、传播和张贴全过程。【工艺】请比较不同图案如何安排空间，不把本区图形当成某地固定规范。【文化】地域间的文化功能与纹饰可能不同，具体含义应由当地实践者及可靠资料解释。",
+      "duration_seconds": 36.74,
+      "sha256": "02dfdc0c8c651464d4098fbf7a2dcca766e416f6c7cde38dece610c0a8255c9a"
+    },
+    "92a16cabc473f0c57d5a3b95316afc2c637183aba5b619994c49f4933f47b280.mp3": {
+      "text": "【基础】这一区提供离线任务卡与文字问答。【背景】非遗教育把兴趣启蒙和技能学习连接起来。【工艺】按钮帮助梳理顺序，不能代替亲手练习。【文化】我们的策展建议是尊重传承人、核对出处，并参加合适的学习活动；具体课程以工作人员说明为准。",
+      "duration_seconds": 33.62,
+      "sha256": "e29c781f4482c78c75fa4b134662627e5f44636a931f2216251b44b77546370c"
+    },
+    "c452029f876bd5fe30ba034d334b13e0997e1036dae534fff6b90e30db256daf.mp3": {
+      "text": "【基础】这一站用雕版印刷讲手艺。【背景】一个印好的图案背后有人协作。【工艺】刻好木版，再上墨把图印到纸上。【文化】观察任务：如果只留下纸，却没人会印，会少掉什么？这里不操作真实刻刀。",
+      "duration_seconds": 27.94,
+      "sha256": "b00a7f016aa1dad88e6448947371995c69fdd8e974bd97f28e209652e4d001cf"
+    },
+    "8e0266e93b68b0aa3a2473cbcd1071be02be6fe6fb1c9309fbc9feb685048694.mp3": {
+      "text": "【基础】这一站讲宣纸和学手艺的人。【背景】我们把接力传授画成一条示意时间线。【工艺】树皮、稻草经过许多手工步骤才能成纸。【文化】请说一说：做纸的人和写字画画的人，怎样一起让文化延续？",
+      "duration_seconds": 27.43,
+      "sha256": "b9196eb4ca78e1478eb1b94e5bd6dda640d63690c3f52eaf89580e55c60fedee"
+    },
+    "9c4434a20fd040898e02ad20d50d7cbf5e1b3c94551eb7d1214b4c9752938036.mp3": {
+      "text": "【基础】雕版印刷让木版上的凸起文字图案着墨成印。【背景】中国雕版印刷技艺于2009年列入联合国教科文组织代表作名录。【工艺】写样、刻版、试印校正、上墨刷印相互配合。【文化】本区示意只讲方法，不指认真实馆藏。",
+      "duration_seconds": 30.58,
+      "sha256": "ca7b056cbc17fcb1e1942479a324f6c14bb91dc60aba12040434f1f38eb32a9b"
+    },
+    "469721d09b2a1ec66868d7bdb442b65b67c704660db7c3b6b3f6e8f87802e5df.mp3": {
+      "text": "【基础】非遗像一份会动的文化礼物。【背景】长辈教给晚辈，再传给下一代。【工艺】不只看做好的物品，也要认识会做的人。【文化】想一想，家里有什么代代相传的歌谣或手艺？",
+      "duration_seconds": 23.86,
+      "sha256": "c1bb843806d725ab42c01e80af5582e1204e985f37785b4cb087ecfe0f45f81a"
+    },
+    "bcba0bd90fd72d9d3bb370494d98ae41c71d54c98dad306268951978c3c80b68.mp3": {
+      "text": "【基础】非遗包括活着的实践、表达、知识与技能。【背景】联合国教科文组织列出口头传统、表演、社会实践、自然知识和传统手工艺五个领域。【工艺】本示范馆从手艺的过程切入。【文化】不同领域可以相互交织，请尊重实践者的解释。",
+      "duration_seconds": 32.4,
+      "sha256": "5798becc73a4da39c1aafe5fe0699cd9ce37143ffd88b1b63c4d868bafacd3c6"
+    },
+    "017d5bc317596c7ed4847716e3ce7e3689df98ee02916c40336c293c92a03265.mp3": {
+      "text": "不同地域的文化功能与纹饰造型存在差异，需要结合民俗与使用情境理解。",
+      "duration_seconds": 10.22,
+      "sha256": "34e3c8e9fc10d47a9c86f843b3ccfa391bb4bd922e1c1981398defc3c6869764"
+    },
+    "00973990b6a989504fcf841a675fd890cc57b19b2705c9caf348db8bcf1cd7b7.mp3": {
+      "text": "传承人群研修研习培训计划鼓励在秉承传统的基础上，通过手工实践与跨界交流提高设计制作水平。",
+      "duration_seconds": 13.58,
+      "sha256": "3c722255eeacc6427aa2fdfb3af9da573f772ae938daf8f4b73e81f86b62d789"
+    },
+    "535f5fe23cd27fe0333307a43c1c4a0fcfb776507d7c11088477eeb50cf265ce.mp3": {
+      "text": "低电量告警，已停止。请工作人员检查电源，确认后结束返航。",
+      "duration_seconds": 9.34,
+      "sha256": "2b6c51071eceb2a7da6a5cdecb7e211f0ad7ba313989a23d57f38fd6a399c31c"
+    },
+    "96d6c854b5b0928c9c2c2f8c68603016c1137450795482c93a71e13b99e0b3e1.mp3": {
+      "text": "口头传统与表达、表演艺术、社会实践仪式与节庆、有关自然和宇宙的知识实践、传统手工艺；一个项目也可能跨领域。",
+      "duration_seconds": 16.87,
+      "sha256": "0981ea72aa4a4383103df57a4abcaee45c5cbf02adabea207b1feb4b74df397b"
+    },
+    "6e876be1c8fab7e6cda1325d9beb988cf5dec3abe3d42e6d3ede6615b7e3b612.mp3": {
+      "text": "可以从兴趣启蒙和有指导的学习活动入手。具体可参加的课程，请工作人员核实安排。",
+      "duration_seconds": 12.74,
+      "sha256": "e44871b43d500e86b87a9fc6372bda105439e12aff096f903b1da54005bbd81e"
+    },
+    "44046ca49650f692fb276a2d1454fa6d23715f90ae0cd515c448ee07c1d384a0.mp3": {
+      "text": "名录确认保护对象，帮助把资源用于有重要价值的非遗项目保护。",
+      "duration_seconds": 8.9,
+      "sha256": "92c31f50c17b0c4a6afcaef70c2505a994ff4abf266c029b6c2fb935485ee62b"
+    },
+    "8bc3b9a8f486b4cdbb468a2296448a96dc25853027b98f4252dbc6c21693e468.mp3": {
+      "text": "它包括由社区认同并代代传承的活态实践、表达、知识和技能。",
+      "duration_seconds": 9.1,
+      "sha256": "9324a5f2c8acd701992bee6b4aa9eeff13d9d6f50abe154197e4e2299e2b4dbb"
+    },
+    "46f624a458d5127996795676887a333543380913c00ce84b8b56c24214f33323.mp3": {
+      "text": "它广泛用于书法、绘画和书籍印刷。",
+      "duration_seconds": 5.47,
+      "sha256": "887fee924465ae58747c9ddf0de668718c6bfa9fa5fde57fa3afc16ad6309a87"
+    },
+    "13edc35e72ca8ebc42fe8db9e8ebc8ae12d76d2563ba5339a0cbb40b08d03822.mp3": {
+      "text": "定位异常，已停止。请工作人员恢复定位并检查位置。",
+      "duration_seconds": 8.21,
+      "sha256": "d4f5c58cac09c8b12eb429116a9acf885ededbfd54319f12beecb555496417db"
+    },
+    "e014ab2d0d983ab42c4f50e511c9974a2d12f08b3f6760d08986abdb88225c69.mp3": {
+      "text": "导览已结束，已返回待命点。感谢参观！",
+      "duration_seconds": 6.46,
+      "sha256": "e7fdf31071b5fbbef2d073789af3c77a2c1dcd427ec928c67d952bd115ba255d"
+    },
+    "9fb2fa6f2b081bb01876d8a35e86be2681ca483c349fd70dc550b7cb8012b4a6.mp3": {
+      "text": "有游客掉队，已停止。请在工作人员协助下集合后确认恢复。",
+      "duration_seconds": 9.29,
+      "sha256": "1471e78a5a7eb30d4d0753fc1c8341cad6b3b13a7a1bc6230748aeb603659978"
+    },
+    "c83996378a6b3d5814a57fa13ac807945fb6621d112fe920d0fdb770089a2d59.mp3": {
+      "text": "木版刻成凸起的文字图案，经过试印校正后上墨，再手工刷印到纸上。",
+      "duration_seconds": 9.96,
+      "sha256": "e62696e251234e358323ba5f648a7372075e84062e68401569b9c6bc87ae7b2b"
+    },
+    "2b9e5063eceac3e20be29d882942eaf7dd5dd48302060e2823fa736dcd7ea389.mp3": {
+      "text": "未听清指令，请使用文字或按钮重试，也可联系工作人员。",
+      "duration_seconds": 8.71,
+      "sha256": "bb87488847d77722a584f88301f170c728c27e87788a5e7535211b6d0fb839da"
+    },
+    "e491f8c7f119effe229d22487e865ba618934287fa68341f2cf0cf7cc76b9c19.mp3": {
+      "text": "欢迎各位，当前为3人同行导览。这里是示范非遗展馆。请选择儿童、大众或深度讲解，确认后开始五区导览。",
+      "duration_seconds": 16.68,
+      "sha256": "47aa814b94f95118edc9cd85fbb8a21810771a6d553c8fa00fc9fdb790506049"
+    },
+    "21719dd3ced331d42da69bd8eb57c1ef8228abd1d9dbf91550faaed0c018db39.mp3": {
+      "text": "欢迎您！这里是示范非遗展馆。请选择儿童、大众或深度讲解，确认后开始五区导览。",
+      "duration_seconds": 13.42,
+      "sha256": "1ae121dd100920e666f83061947dab75e38ad1c70a0f592c142484507ff4df38"
+    },
+    "78b2b219be0915f75039da003a4c3fd1c3dc4ec1e351b552c7bbfb423e47a984.mp3": {
+      "text": "系统异常，已停止，请联系工作人员。",
+      "duration_seconds": 5.81,
+      "sha256": "4b9f58608a2219b4c76a45c3b56d9554505c2387d878003b43b459b6f9c0090a"
+    },
+    "325031e4fda5e596d8fef9c020f761b14c670c05bb2f0f4a6fa95af0bee97486.mp3": {
+      "text": "该问题超出已核验知识范围，请工作人员解答。",
+      "duration_seconds": 6.77,
+      "sha256": "946b6f1c92d59464884a95270f45ab772c6d6b472d6d2200ccee390abf8e4f86"
+    },
+    "5504b12cfdd1d3f64dde90ef4e8adaaa4c2dfaacd5d5d98a4babc928235cabb1.mp3": {
+      "text": "路线受阻，已停止。请工作人员确认通道安全后恢复。",
+      "duration_seconds": 8.23,
+      "sha256": "ff559e6f40d6140bab104ccdf838eb7fd3202206962dda04268b944692768cee"
+    },
+    "23d9f286e9feb5a2bf275a3557b90c6009b6141732299dde19cb4e60bbba0e51.mp3": {
+      "text": "还要支持手艺人继续实践，并将技能和知识教给他人。",
+      "duration_seconds": 7.73,
+      "sha256": "301a12cf80653e9c972437ceb5a53d8d0c9e15a753ba8e7e8ebb41b3ad19771b"
+    },
+    "79d3b1970b2dd71b49a7b6b2e553f802e1668efab260f31f51847ff47d3a5997.mp3": {
+      "text": "通常用剪刀或刻刀在纸上剪刻纹样；真实工具体验应由工作人员安排。",
+      "duration_seconds": 10.03,
+      "sha256": "7373e97f9068e21801b9103bdb88a515a41ffaa17171eeca065b90fdb08166e3"
+    },
+    "preview.mp3": {
+      "text": "歡迎嚟到非遺展館，我係你嘅導覽機械人。我可以用粵語帶你參觀五個展區。",
+      "duration_seconds": 11.06,
+      "sha256": "5ee91b692eeefc33ccc6902e14c1a4bfbf5cd874a75c524ec20359f61a943e50"
+    }
+  }
+}

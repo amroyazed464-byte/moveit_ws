@@ -11,7 +11,7 @@ import unicodedata
 
 
 MODES = ('child', 'general', 'deep')
-LANGUAGES = ('zh', 'en')
+LANGUAGES = ('zh', 'en', 'yue')
 FAULTS = {
     'unclear': ('未听清指令，请使用文字或按钮重试，也可联系工作人员。',
                 'The command was unclear. Please use text or buttons, or ask staff.'),
@@ -107,6 +107,14 @@ class GuideSession:
         self.message = text
         self._effect('speak', **self.speech)
 
+    def _welcome(self):
+        count = self.visitor_count
+        self._say(('欢迎您！' if count == 1 else f'欢迎各位，当前为{count}人同行导览。')
+                  + '这里是示范非遗展馆。请选择儿童、大众或深度讲解，确认后开始五区导览。',
+                  f'Welcome, {count} visitor(s). This is a demonstration heritage hall. '
+                  'Choose a narration level and confirm to start the five-zone tour.', 'welcome')
+        self._theme('welcome', '#34d399')
+
     def _theme(self, expression, color):
         self.theme = {'expression': expression, 'color': color,
                       'zone_id': self.zone['id'] if self.zone else None}
@@ -194,29 +202,35 @@ class GuideSession:
         kind = event['type']
         allowed = ('visitor', 'start', 'arrived', 'speech_done', 'pause', 'resume', 'repeat',
                    'skip', 'next', 'end', 'question', 'quiz_answer', 'fault', 'recover',
-                   'manual', 'home_arrived')
+                   'manual', 'home_arrived', 'language')
         if kind not in allowed:
             raise ValueError('Unknown command: ' + kind)
         if kind == 'start':
             mode, language, auto = event.get('mode', 'general'), event.get('language', 'zh'), event.get('auto_advance', False)
             if mode not in MODES or language not in LANGUAGES or not isinstance(auto, bool):
-                raise ValueError('Choose child/general/deep, zh/en and a boolean auto_advance')
+                raise ValueError('Choose child/general/deep, zh/en/yue and a boolean auto_advance')
+        if kind == 'language':
+            if event.get('language') not in LANGUAGES:
+                raise ValueError('Choose zh/en/yue')
+            if self.state not in ('IDLE', 'WELCOMING', 'COMPLETE'):
+                raise ValueError('请在待命或迎宾时选择语言')
         if kind == 'visitor':
             count = event.get('count')
             if isinstance(count, bool) or not isinstance(count, int) or count < 0:
                 raise ValueError('Visitor count must be a non-negative integer')
         before = self.state
         self._effects = []
-        if kind == 'visitor':
+        if kind == 'language':
+            self.language = event['language']
+            self.speech = None
+            if self.state == 'WELCOMING':
+                self._welcome()
+        elif kind == 'visitor':
             self.visitor_count = count
             if count and self.state in ('IDLE', 'WELCOMING', 'COMPLETE'):
                 self.state = 'WELCOMING'
                 self.stats['visitors'] += count
-                self._say(('欢迎您！' if count == 1 else f'欢迎各位，当前为{count}人同行导览。')
-                          + '这里是示范非遗展馆。请选择儿童、大众或深度讲解，确认后开始五区导览。',
-                          f'Welcome, {count} visitor(s). This is a demonstration heritage hall. '
-                          'Choose a narration level and confirm to start the five-zone tour.', 'welcome')
-                self._theme('welcome', '#34d399')
+                self._welcome()
         elif kind == 'start' and self.state in ('IDLE', 'WELCOMING', 'COMPLETE'):
             self.mode, self.language, self.auto_advance = mode, language, auto
             self.stats['sessions'] += 1
