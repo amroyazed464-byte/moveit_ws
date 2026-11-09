@@ -8,7 +8,7 @@
 
 如果尚未安装ROS，请先按 [ROS 2 Jazzy官方安装说明](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html) 安装 `ros-jazzy-desktop`。本包不会自行添加软件源或修改系统登录配置。[Gazebo官方配套说明](https://gazebosim.org/docs/latest/ros_installation/) 将Jazzy与Harmonic对应；依赖脚本使用ROS提供的配套包。
 
-解压后进入 `heritage-guide-demo` 文件夹，在该目录打开终端。路径可以自行选择，后续不要在别的工作区里运行下面的命令。
+解压位置可调整，建议保留默认英文目录名 `heritage-guide-demo`。在该文件夹打开终端，后续不要在别的工作区里运行下面的命令。
 
 ## 2. 安装依赖、校验和构建
 

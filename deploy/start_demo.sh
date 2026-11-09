@@ -17,6 +17,7 @@ python3 - <<'PY'
 import socket
 try:
     with socket.socket() as sock:
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.bind(('0.0.0.0', 8765))
 except OSError:
     raise SystemExit('导览端口8765已被占用，请先关闭旧的导览程序；本次未启动新仿真。')
